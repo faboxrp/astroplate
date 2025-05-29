@@ -24,9 +24,9 @@ const sortedServices = sortByOrder(allServices);
 const call_to_action = (await getEntry("ctaSection", "call-to-action")) as CollectionEntry<CtaSectionCollectionName>;
 
 // Variable para decidir el fondo de la sección de intro_text
-const introSectionBgClass = "bg-body"; // Opción 1: Fondo del body (#FFFFF2)
-// const introSectionBgClass = "bg-light"; // Opción 2: Fondo 'light' (#FCE8FB o #FDD7F4)
-// const introSectionBgClass = "bg-gray-dark"; // Opción 3: Fondo 'gray-dark' (#505050)
+const introSectionBgClass: string = "bg-body"; // Opción 1: Fondo del body (#FFFFF2)
+// const introSectionBgClass: string = "bg-light"; // Opción 2: Fondo 'light' (#FCE8FB o #FDD7F4)
+// const introSectionBgClass: string = "bg-gray-dark"; // Opción 3: Fondo 'gray-dark' (#505050)
 
 // Variable para el color del texto de intro_text, dependiente del fondo
 let introTextColorClass = "text-text"; // Color de texto por defecto
