@@ -1,16 +1,24 @@
 {
   "main": [
     {
-      "name": "Home",
+      "name": "Inicio",
       "url": "/"
     },
     {
-      "name": "About",
-      "url": "/about"
+      "name": "Nosotros",
+      "url": "/nosotros"
     },
     {
-      "name": "Elements",
-      "url": "/elements"
+      "name": "Servicios",
+      "url": "/servicios"
+    },
+    {
+      "name": "Blog",
+      "url": "/blog"
+    },
+    {
+      "name": "Contacto",
+      "url": "/contacto"
     },
     {
       "name": "Pages",
@@ -18,20 +26,20 @@
       "hasChildren": true,
       "children": [
         {
-          "name": "Contact",
-          "url": "/contact"
+          "name": "Contacto",
+          "url": "/contacto"
         },
         {
           "name": "Blog",
           "url": "/blog"
         },
         {
-          "name": "Authors",
-          "url": "/authors"
+          "name": "Autores",
+          "url": "/autores"
         },
         {
-          "name": "Categories",
-          "url": "/categories"
+          "name": "Categorías",
+          "url": "/categorias"
         },
         {
           "name": "Tags",
@@ -46,12 +54,12 @@
   ],
   "footer": [
     {
-      "name": "Elements",
-      "url": "/elements"
+      "name": "Contacto",
+      "url": "/contacto"
     },
     {
-      "name": "Privacy Policy",
-      "url": "/privacy-policy"
+      "name": "Política de Privacidad",
+      "url": "/politica-privacidad"
     }
   ]
 }

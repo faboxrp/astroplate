@@ -1,0 +1,28 @@
+---
+import { CountUp } from "countup.js";
+export interface Props {
+  value: number;
+  suffix?: string;
+  duration?: number;
+}
+
+const { value, suffix = "", duration = 2 } = Astro.props;
+const id = `counter-${Math.random().toString(36).slice(2)}`;
+
+// Usamos un script island específico, así solo se hidrata el span.
+---
+
+<span id={id} class="inline-block">
+  0{suffix}
+  <script is:inline>
+    const el = document.getElementById("{id}");
+    // Solo iniciamos cuando el elemento entra en el viewport
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      const cu = new CountUp(el, { value }, { duration: { duration }, suffix: "{suffix}" });
+      if (!cu.error) cu.start();
+    });
+    io.observe(el);
+  </script>
+</span>

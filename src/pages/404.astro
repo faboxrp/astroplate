@@ -1,25 +1,33 @@
 ---
 import Base from "@/layouts/Base.astro";
+import ImageMod from "@/components/ImageMod.astro"; // Opcional, si quieres añadir una imagen
 ---
 
-<Base title="Page Not Found">
+<Base title="Página No Encontrada - OrthoPure">
   <section class="section-sm text-center">
     <div class="container">
       <div class="row justify-center">
-        <div class="sm:col-10 md:col-8 lg:col-6">
-          <span
-            class="text-[8rem] block font-bold text-text-dark dark:text-darkmode-text-dark"
-          >
-            404
-          </span>
-          <h1 class="h2 mb-4">Page not found</h1>
-          <div class="content">
-            <p>
-              The page you are looking for might have been removed, had its name
-              changed, or is temporarily unavailable.
-            </p>
+        <div class="sm:col-10 md:col-8 lg:col-7">
+          {/* Opcional: Imagen relacionada con dientes/sonrisas o el logo */}
+          <div class="mb-8">
+            <ImageMod src="/images/404-orthopure-graphic.svg" width={150} height={150} alt="Gráfico de página no encontrada" class="mx-auto" />
           </div>
-          <a href="/" class="btn btn-primary mt-8">Back to home</a>
+
+          <span class="text-[6rem] lg:text-[8rem] block font-bold text-primary dark:text-darkmode-primary" aria-hidden="true"> 404 </span>
+          <h1 class="h2 mb-4">¡Oops! Página no encontrada</h1>
+          <div class="content text-lg">
+            {/* Aumentado ligeramente el tamaño del texto para mejor lectura */}
+            <p class="mb-4">Parece que la página que buscas se ha movido, ha cambiado de nombre o simplemente no está disponible en este momento.</p>
+            <p>No te preocupes, ¡puedes volver al inicio o explorar nuestros servicios!</p>
+          </div>
+          <div class="mt-8 space-y-4 sm:space-y-0 sm:space-x-4">
+            {/* Para mejor espaciado de botones en móvil */}
+            <a href="/" class="btn btn-primary"> Volver al Inicio </a>
+            <a href="/servicios" class="btn btn-outline-primary">
+              {/* Botón secundario */}
+              Ver Servicios
+            </a>
+          </div>
         </div>
       </div>
     </div>

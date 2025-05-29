@@ -1,0 +1,13 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import { getEntry } from "astro:content";
+
+const entry = await getEntry("about", "hero");
+const data = entry?.data;
+---
+
+<section class="py-20 text-center bg-gradient-to-b from-primary/5 to-background">
+  {data && data.image && <ImageMod src={data.image} alt={data.title} width={320} height={320} class="mx-auto mb-8 rounded-full shadow-xl" format="webp" />}
+  <h1 class="text-3xl font-extrabold md:text-5xl" set:html={data && data.title} />
+  {data && data.description && <p class="mt-4 max-w-xl mx-auto text-muted-foreground">{data.description}</p>}
+</section>

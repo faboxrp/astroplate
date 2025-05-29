@@ -1,53 +1,52 @@
 ---
-# Banner
+# Banner (Hero Section)
 banner:
-  title: "The Ultimate Starter Template You Need To Start Your Astro Project"
-  content: "Astroplate is a free starter template built with Astro and TailwindCSS, providing everything you need to jumpstart your Astro project and save valuable time."
-  image: "/images/banner.png"
+  title: "OrthoPure: Creamos Sonrisas, Transformamos Vidas"
+  content: "En OrthoPure, la Dra. Paola Mafla Rosero y su equipo te ofrecen un trato cercano y 100% personalizado. Descubre cómo la **ortodoncia y ortopedia maxilar** pueden mejorar tu salud y confianza. ¡Agenda tu valoración hoy mismo!"
+  image: "/images/banner-orthopure.jpg" # Placeholder: Sugerencia: Dra. Paola sonriendo, ambiente acogedor del consultorio, o una sonrisa radiante.
   button:
     enable: true
-    label: "Get Started For Free"
-    link: "https://github.com/zeon-studio/astroplate"
+    label: "Agenda tu Valoración"
+    link: "/contacto" # Enlaza a tu página de contacto
 
-# Features
+# Features (Secciones de Características/Servicios Destacados)
 features:
-  - title: "What's Included in Astroplate"
-    image: "/images/service-1.png"
-    content: "Astroplate is a comprehensive starter template that includes everything you need to get started with your Astro project. What's Included in Astroplate"
+  - title: "Nuestra Especialidad: Ortodoncia y Ortopedia Maxilar"
+    image: "/images/feature-ortodoncia-ortopedia.jpg" # Placeholder: Sugerencia: Joven sonriendo con brackets discretos, o una ilustración amigable del proceso.
+    content: "Ofrecemos soluciones de ortodoncia y ortopedia maxilar adaptadas a cada etapa de la vida, desde niños hasta adultos. Utilizamos las técnicas más actuales para garantizar resultados efectivos, funcionales y estéticos. Tu sonrisa es nuestra prioridad."
     bulletpoints:
-      - "10+ Pre-build pages"
-      - "95+ Google Pagespeed Score"
-      - "Build with Astro and TailwindCSS for easy and customizable styling"
-      - "Fully responsive on all devices"
-      - "SEO-optimized for better search engine rankings"
-      - "**Open-source and free** for personal and commercial use"
-    button:
-      enable: false
-      label: "Get Started Now"
-      link: "#"
-
-  - title: "Discover the Key Features Of Astro"
-    image: "/images/service-2.png"
-    content: "Astro is an all-in-one web framework for building fast, content-focused websites. It offers a range of exciting features for developers and website creators. Some of the key features are:"
-    bulletpoints:
-      - "Zero JS, by default: No JavaScript runtime overhead to slow you down."
-      - "Customizable: Tailwind, MDX, and 100+ other integrations to choose from."
-      - "UI-agnostic: Supports React, Preact, Svelte, Vue, Solid, Lit and more."
+      - "**Ortodoncia Infantil y Ortopedia:** Corrección y guía del desarrollo dental y maxilar en niños."
+      - "**Ortodoncia para Adolescentes:** Alineamos sonrisas para una etapa llena de confianza (brackets metálicos y estéticos)."
+      - "**Ortodoncia para Adultos:** Nunca es tarde para la sonrisa que siempre has deseado."
+      - "Diagnóstico preciso y planes de tratamiento individualizados."
     button:
       enable: true
-      label: "Get Started Now"
-      link: "https://github.com/zeon-studio/astroplate"
+      label: "Conoce Nuestros Tratamientos"
+      link: "/servicios" # Enlaza a tu página de servicios
 
-  - title: "The Top Reasons to Choose Astro for Your Next Project"
-    image: "/images/service-3.png"
-    content: "With Astro, you can build modern and content-focused websites without sacrificing performance or ease of use."
+  - title: "Confianza y Cuidado Experto con la Dra. Paola Mafla Rosero"
+    image: "/images/dra-paola-mafla.jpg" # Placeholder: Sugerencia: Foto profesional y cercana de la Dra. Paola.
+    content: "En OrthoPure, creemos en un trato humano, cercano y altamente profesional. La Dra. Paola Mafla Rosero no solo cuenta con una amplia experiencia clínica, sino también con una destacada trayectoria como **docente universitaria y de posgrado en Odontología y Ortodoncia**, lo que se refleja en la claridad, conocimiento y cuidado con cada paciente."
     bulletpoints:
-      - "Instantly load static sites for better user experience and SEO."
-      - "Intuitive syntax and support for popular frameworks make learning and using Astro a breeze."
-      - "Use any front-end library or framework, or build custom components, for any project size."
-      - "Built on cutting-edge technology to keep your projects up-to-date with the latest web standards."
+      - "**Atención 100% Personalizada:** Cada tratamiento es único, diseñado específicamente para tus necesidades."
+      - "**Experiencia y Docencia de Alto Nivel:** Confía en el conocimiento y habilidad de una experta reconocida."
+      - "**Ambiente Confiable y Cercano:** Queremos que te sientas cómodo y seguro en cada visita."
+      - "Compromiso con tu bienestar integral y la excelencia en los resultados."
     button:
-      enable: false
-      label: ""
-      link: ""
+      enable: true
+      label: "Más Sobre Nosotros"
+      link: "/nosotros" # Enlaza a tu página "Nosotros"
+  
+  # Puedes añadir una tercera sección "feature" si lo deseas, por ejemplo:
+  # - title: "Resultados Que Inspiran Confianza (Antes y Después)"
+  #   image: "/images/feature-antes-despues.jpg" # Placeholder: Collage de fotos de antes y después
+  #   content: "Mira las transformaciones que hemos logrado. La ortodoncia no solo mejora la estética, sino también la función y la salud bucal. Estamos orgullosos de compartir los resultados de nuestros pacientes."
+  #   bulletpoints:
+  #     - "Casos reales de ortodoncia y ortopedia."
+  #     - "Impacto positivo en la sonrisa y autoestima."
+  #     - "Testimonios de pacientes satisfechos (ver más abajo)."
+  #   button:
+  #     enable: true
+  #     label: "Ver Galería de Casos" # Podría enlazar a una sección en "Servicios" o una página "Casos"
+  #     link: "/casos" # Ejemplo de enlace
 ---

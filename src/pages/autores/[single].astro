@@ -1,0 +1,70 @@
+---
+import BlogCard from "@/components/BlogCard.astro";
+import ImageMod from "@/components/ImageMod.astro";
+import Social from "@/components/Social.astro";
+import Base from "@/layouts/Base.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import { slugify, markdownify } from "@/lib/utils/textConverter";
+import { render } from "astro:content";
+
+// get all static paths for authors
+export async function getStaticPaths() {
+  const COLLECTION_FOLDER = "autores";
+  const authors = await getSinglePage(COLLECTION_FOLDER);
+
+  const paths = authors.map((author) => ({
+    params: {
+      single: author.id, // REVERTIDO: Usando author.id como estaba antes
+    },
+    props: { author },
+  }));
+  return paths;
+}
+
+const { author } = Astro.props;
+const { title, social, meta_title, description, image } = author.data;
+
+// get all posts by author
+const BLOG_FOLDER = "blog";
+const posts = await getSinglePage(BLOG_FOLDER);
+const { Content } = await render(author);
+
+// Filtro de posts por autor:
+// Compara el slug del título del autor (desde la página de autor) con el slug del campo 'author' en los posts.
+const postFilterByAuthor = posts.filter(
+  (post) => slugify(post.data.author) === slugify(title) // REVERTIDO: Usando slugify(title)
+);
+---
+
+<Base title={title} meta_title={meta_title} description={description} image={image}>
+  <section class="section-sm pb-0">
+    <div class="container">
+      <div class="row justify-center">
+        <div class="mb-12 md:col-10 lg:col-8">
+          {image && <ImageMod src={image} class="mx-auto mb-10 rounded-full" height={180} width={180} alt={title} format="webp" />}
+          <h1 class="h2 mb-6 text-center">{title}</h1>
+          <div class="content">
+            {/* Astro inyectará aquí el contenido del archivo .md del autor */}
+            <Content />
+          </div>
+          {social && social.length > 0 && <Social source={social} className="social-icons justify-center text-center" />}
+        </div>
+      </div>
+
+      {
+        postFilterByAuthor.length > 0 && (
+          <div class="row justify-center border-t border-border pt-14 dark:border-darkmode-border">
+            <div class="col-12 mb-8 text-center">
+              <h2 class="h3">Artículos Escritos por {title}</h2>
+            </div>
+            {postFilterByAuthor.map((post) => (
+              <div class="mb-14 md:col-6 lg:col-4">
+                <BlogCard data={post} />
+              </div>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+</Base>

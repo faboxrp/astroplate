@@ -1,10 +1,11 @@
 ---
 enable: true
-title: "Ready to build your next project with Astro?"
-image: "/images/call-to-action.png"
-description: "Experience the future of web development with Astroplate and Astro. Build lightning-fast static sites with ease and flexibility."
+title: "¿Listo para la Sonrisa que Siempre Soñaste?"
+description: "En **OrthoPure** te ofrecemos un trato cercano y profesional para alcanzar tus objetivos de salud y estética dental. ¡Agenda tu consulta de valoración y da el primer paso!"
+image: "/images/cta/cta1.png" # Reemplazar con una imagen real o un buen stock temporal
+image_alt: "Dra. Paola Mafla Rosero en consulta de ortodoncia"
 button:
   enable: true
-  label: "Get Started Now"
-  link: "https://github.com/zeon-studio/astroplate"
+  label: "Agendar Consulta"
+  link: "/contacto" # O podría ser un enlace directo a WhatsApp si se prefiere
 ---

@@ -19,6 +19,11 @@
       "name": "linkedin",
       "icon": "FaLinkedin",
       "link": "https://www.linkedin.com/"
+    },
+    {
+      "name": "tiktok",
+      "icon": "FaTiktok",
+      "link": "https://www.tiktok.com/"
     }
   ]
 }

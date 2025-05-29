@@ -1,17 +1,16 @@
 {
   "site": {
-    "title": "Astroplate",
-    "base_url": "https://astroplate.netlify.app",
+    "title": "OrthoPure",
+    "base_url": "https://orthopure.ec",
     "base_path": "/",
     "trailing_slash": false,
-    "favicon": "/images/favicon.png",
+    "favicon": "/images/favicon.ico",
     "logo": "/images/logo.png",
     "logo_darkmode": "/images/logo-darkmode.png",
     "logo_width": "150",
     "logo_height": "30",
-    "logo_text": "Astroplate"
+    "logo_text": "OrthoPure"
   },
-
   "settings": {
     "search": true,
     "sticky_header": true,
@@ -21,32 +20,27 @@
     "summary_length": 200,
     "blog_folder": "blog"
   },
-
   "params": {
     "contact_form_action": "#",
-    "copyright": "Designed And Developed by [Zeon Studio](https://zeon.studio)"
+    "copyright": "Diseñado y Desarrollado por [Smartdataec](https://smartdataec.com)"
   },
-
   "navigation_button": {
-    "enable": true,
+    "enable": false,
     "label": "Get Started",
     "link": "https://github.com/zeon-studio/astroplate"
   },
-
   "google_tag_manager": {
     "enable": false,
     "gtm_id": "GTM-XXXXXX"
   },
-
   "disqus": {
     "enable": true,
     "shortname": "themefisher-template",
     "settings": {}
   },
-
   "metadata": {
-    "meta_author": "zeon.studio",
+    "meta_author": "smartdataec",
     "meta_image": "/images/og-image.png",
-    "meta_description": "astro and tailwind boilerplate"
+    "meta_description": "Orthopure es una clínica dental que ofrece tratamientos personalizados y tecnología avanzada para lograr sonrisas perfectas. Nuestro equipo de expertos se dedica a brindar atención de calidad y resultados excepcionales. Descubre cómo podemos transformar tu sonrisa hoy mismo."
   }
 }

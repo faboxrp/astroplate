@@ -1,0 +1,51 @@
+---
+// src/layouts/components/services/ServiceItem.astro
+import ImageMod from "@/components/ImageMod.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
+import * as Icons from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+
+interface Props {
+  service: CollectionEntry<"servicios">;
+  index: number;
+}
+
+const { service, index } = Astro.props;
+const { title, short_description, icon, image } = service.data; // 'content' ya no se obtiene de service.data
+
+// Importar el componente Content del entry
+const { Content } = await render(service);
+
+const getIcon = (name?: string): LucideIcon | null => {
+  if (!name) return null;
+  return (Icons as unknown as Record<string, LucideIcon>)[name] ?? Icons.Sparkles;
+};
+const IconComponent = getIcon(icon);
+const isEven = index % 2 === 0;
+---
+
+<section class={`section-sm service-item ${isEven ? "bg-gradient" : ""}`}>
+  <div class="container">
+    <div class="row items-center justify-between">
+      <div class:list={["mb:md-0 mb-6 md:col-5", { "md:order-2": !isEven }]}>
+        {image && <ImageMod src={image} height={400} width={500} alt={title} class="w-full rounded-lg shadow-lg object-cover" format="webp" />}
+      </div>
+      <div class:list={["md:col-7 lg:col-6", { "md:order-1": !isEven }]}>
+        <div class="flex items-center mb-4">
+          {IconComponent && <IconComponent className="h-10 w-10 mr-3 flex-shrink-0" />}
+          <h2 set:html={markdownify(title)} class="h3" />
+        </div>
+        <p set:html={markdownify(short_description)} class="mb-6 text-lg leading-relaxed" />
+
+        {/* RENDERIZAR EL CONTENIDO DEL CUERPO DEL MARKDOWN */}
+        <div class="prose dark:prose-invert max-w-none text-primary dark:text-darkmode-primary">
+          <Content />
+        </div>
+
+        <a href={`/contacto?servicio=${encodeURIComponent(title)}`} class="btn btn-primary mt-8"> Solicitar Información </a>
+      </div>
+    </div>
+  </div>
+</section>

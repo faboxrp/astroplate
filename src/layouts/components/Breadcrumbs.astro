@@ -6,7 +6,7 @@ const { className }: { className?: string } = Astro.props;
 const paths = Astro.url.pathname.split("/").filter((x) => x);
 let parts = [
   {
-    label: "Home",
+    label: "Inicio",
     href: "/",
     "aria-label": Astro.url.pathname === "/" ? "page" : undefined,
   },
@@ -34,9 +34,7 @@ paths.forEach((label: string, i: number) => {
               {label}
             </a>
           ) : (
-            <span class="text-text-light dark:text-darkmode-text-light">
-              {label}
-            </span>
+            <span class="text-text-light dark:text-darkmode-text-light">{label}</span>
           )}
         </li>
       ))

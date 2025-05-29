@@ -1,0 +1,434 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import { getEntry, type CollectionEntry } from "astro:content";
+
+const story = (await getEntry("story", "story")) as CollectionEntry<"story">;
+const { title, subtitle, cover, avatar, stats, doctor } = story.data;
+---
+
+<section data-component="story" class="relative isolate overflow-hidden py-28 bg-gradient-to-b from-primary/5 to-background dark:from-primary/10">
+  <!-- Cover parallax con animación CSS -->
+  {
+    cover && (
+      <div class="absolute inset-x-0 top-0 h-60 overflow-hidden pointer-events-none cover-container">
+        <ImageMod src={cover} alt={title} width={1440} height={240} class="h-full w-full object-cover object-center parallax cover-fade" format="webp" />
+      </div>
+    )
+  }
+
+  <div class="container relative mt-48 grid gap-16 lg:grid-cols-2 items-center">
+    <!-- Texto -->
+    <div class="space-y-8 lg:pr-12 fade-left text-section">
+      <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight
+                 text-darkmode-light dark:text-darkmode-dark title-glow">
+        {title}
+      </h2>
+
+      <p class="text-lg leading-relaxed text-muted-foreground subtitle-slide" set:html={subtitle} />
+
+      <!-- Estadísticas con efectos hover CSS -->
+      <dl class="mt-10 grid gap-8 sm:grid-cols-3">
+        {
+          stats.map((s, i) => (
+            <div class="text-center fade-up stat-card hover-lift" style={`--delay:${i * 120}ms; --stagger:${i * 0.1}s`}>
+              <dt class="counter text-4xl font-extrabold text-primary stat-number" data-target={s.value} data-suffix={s.suffix}>
+                0{s.suffix}
+              </dt>
+              <dd class="mt-1 text-sm text-muted-foreground stat-label">{s.label}</dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      {
+        doctor && (
+          <div class="fade-up doctor-card" style="--delay:400ms">
+            <div
+              class="mt-12 rounded-3xl bg-background/60 p-8 shadow-xl
+                        ring-1 ring-primary/10 backdrop-blur-lg glass-card hover-glow">
+              <h3 class="text-xl font-bold text-darkmode-light dark:text-darkmode-dark mb-3 doctor-name">{doctor.name}</h3>
+              <ul class="space-y-2 leading-relaxed list-disc list-inside text-muted-foreground">
+                {doctor.points.map((p, index) => (
+                  <li class="doctor-point" style={`--point-delay:${index * 0.1}s`} set:html={p} />
+                ))}
+              </ul>
+            </div>
+          </div>
+        )
+      }
+    </div>
+
+    <!-- Avatar con efectos CSS -->
+    {
+      avatar && (
+        <div class="mx-auto lg:mx-0 lg:order-first fade-right avatar-container">
+          <ImageMod
+            src={avatar}
+            alt={doctor?.name ?? title}
+            width={420}
+            height={520}
+            class="aspect-[3/4] w-full max-w-sm rounded-[2rem] object-cover shadow-2xl avatar-image hover-rotate"
+            format="webp"
+          />
+        </div>
+      )
+    }
+  </div>
+
+  <style>
+    /* ===== ANIMACIONES CSS PURAS ===== */
+
+    /* Cover fade-in al cargar */
+    .cover-fade {
+      animation: coverSlideDown 1.2s ease-out;
+    }
+
+    @keyframes coverSlideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px) scale(1.05);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Título con efecto glow */
+    .title-glow {
+      animation: titleAppear 1s ease-out 0.3s both;
+      position: relative;
+    }
+
+    .title-glow::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg, transparent, hsl(var(--primary) / 0.1), transparent);
+      opacity: 0;
+      animation: titleGlow 3s ease-in-out 1.5s infinite;
+      pointer-events: none;
+      border-radius: 0.5rem;
+    }
+
+    @keyframes titleAppear {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+        filter: blur(5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+
+    @keyframes titleGlow {
+      0%,
+      100% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    /* Subtítulo con slide desde la derecha */
+    .subtitle-slide {
+      animation: slideFromRight 0.8s ease-out 0.6s both;
+    }
+
+    @keyframes slideFromRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Efectos hover para tarjetas de estadísticas */
+    .stat-card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .hover-lift:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .hover-lift:hover::before {
+      left: 100%;
+    }
+
+    .stat-number {
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover .stat-number {
+      transform: scale(1.1);
+      text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+    }
+
+    /* Glass card con glow hover */
+    .glass-card {
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .hover-glow:hover {
+      box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.15),
+        0 0 30px hsl(var(--primary) / 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Animación escalonada para puntos del doctor */
+    .doctor-point {
+      opacity: 0;
+      animation: doctorPointFade 0.6s ease-out forwards;
+      animation-delay: calc(1.2s + var(--point-delay));
+    }
+
+    @keyframes doctorPointFade {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Avatar con rotación sutil */
+    .avatar-image {
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hover-rotate:hover {
+      transform: rotate(2deg) scale(1.05);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+    }
+
+    /* ===== ANIMACIONES CON VIEW TRANSITIONS (Navegadores modernos) ===== */
+    @supports (animation-timeline: view()) {
+      .text-section {
+        animation: slideInLeft linear forwards;
+        animation-timeline: view();
+        animation-range: entry 0% entry 50%;
+      }
+
+      .avatar-container {
+        animation: slideInRight linear forwards;
+        animation-timeline: view();
+        animation-range: entry 0% entry 50%;
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-100px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(100px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+    }
+
+    /* ===== EFECTOS PARALLAX MEJORADOS ===== */
+    .parallax {
+      will-change: transform;
+    }
+
+    @supports (animation-timeline: scroll()) {
+      .parallax {
+        animation: yParallax ease-out;
+        animation-timeline: scroll();
+        animation-range: cover 0% cover 100%;
+      }
+
+      @keyframes yParallax {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(20%);
+        }
+      }
+    }
+
+    /* ===== PLAN B - Animaciones JS ===== */
+    @media (prefers-reduced-motion: no-preference) {
+      .fade-up,
+      .fade-left,
+      .fade-right {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      .fade-left {
+        transform: translateX(-32px);
+      }
+      .fade-right {
+        transform: translateX(32px);
+      }
+    }
+
+    .show {
+      opacity: 1;
+      transform: none;
+      transition:
+        opacity 0.7s ease-out,
+        transform 0.7s ease-out;
+      transition-delay: var(--delay, 0ms);
+    }
+
+    /* Fallback para navegadores sin soporte */
+    @supports not (animation-timeline: view()) {
+      .fade-up,
+      .fade-left,
+      .fade-right {
+        opacity: 1;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hover-lift:hover {
+        transform: translateY(-4px) scale(1.01);
+      }
+
+      .hover-rotate:hover {
+        transform: rotate(1deg) scale(1.02);
+      }
+    }
+  </style>
+
+  <!-- JavaScript mejorado -->
+  <script is:inline>
+    (() => {
+      const COMPONENT_ID = "story-animations";
+
+      function resetAnimations() {
+        const section = document.querySelector('section[data-component="story"]');
+        if (!section) return;
+
+        const elements = section.querySelectorAll(".fade-up, .fade-left, .fade-right, .counter");
+        elements.forEach((el) => {
+          el.classList.remove("show");
+          if (el.classList.contains("counter")) {
+            const suffix = el.dataset.suffix || "";
+            el.textContent = "0" + suffix;
+          }
+        });
+      }
+
+      function initAnimations() {
+        const section = document.querySelector('section[data-component="story"]');
+        if (!section) return;
+
+        const io = new IntersectionObserver(
+          (entries) =>
+            entries.forEach((el) => {
+              if (el.isIntersecting) {
+                el.target.classList.add("show");
+
+                // Contador animado mejorado
+                if (el.target.classList.contains("counter")) {
+                  const goal = +el.target.dataset.target;
+                  const suffix = el.target.dataset.suffix || "";
+                  const duration = 1200;
+                  let start;
+
+                  const tick = (t) => {
+                    if (!start) start = t;
+                    const progress = Math.min((t - start) / duration, 1);
+                    const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+                    const current = Math.round(easeOutCubic * goal);
+                    el.target.textContent = current + suffix;
+
+                    if (progress < 1) {
+                      requestAnimationFrame(tick);
+                    }
+                  };
+                  requestAnimationFrame(tick);
+                }
+                io.unobserve(el.target);
+              }
+            }),
+          { threshold: 0.25, rootMargin: "0px 0px -50px 0px" }
+        );
+
+        section.querySelectorAll(".fade-up,.fade-left,.fade-right,.counter").forEach((el) => io.observe(el));
+
+        if (!window.astroObservers) window.astroObservers = {};
+        window.astroObservers[COMPONENT_ID] = io;
+      }
+
+      function setupAnimations() {
+        if (window.astroObservers?.[COMPONENT_ID]) {
+          window.astroObservers[COMPONENT_ID].disconnect();
+        }
+        resetAnimations();
+        setTimeout(() => initAnimations(), 50);
+      }
+
+      if (document.querySelector('section[data-component="story"]')) {
+        setupAnimations();
+
+        if (!window.astroListenersAdded) {
+          window.astroListenersAdded = new Set();
+        }
+
+        if (!window.astroListenersAdded.has(COMPONENT_ID)) {
+          const handlePageLoad = () => {
+            if (document.querySelector('section[data-component="story"]')) {
+              setupAnimations();
+            }
+          };
+
+          const handleBeforePreparation = () => {
+            if (window.astroObservers?.[COMPONENT_ID]) {
+              window.astroObservers[COMPONENT_ID].disconnect();
+            }
+          };
+
+          document.addEventListener("astro:page-load", handlePageLoad);
+          document.addEventListener("astro:before-preparation", handleBeforePreparation);
+
+          window.astroListenersAdded.add(COMPONENT_ID);
+        }
+      }
+    })();
+  </script>
+</section>

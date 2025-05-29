@@ -7,19 +7,19 @@ const blogCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     meta_title: z.string().optional(),
-    description: z.string().optional(),
-    date: z.date().optional(),
-    image: z.string().optional(),
-    author: z.string().default("Admin"),
-    categories: z.array(z.string()).default(["others"]),
-    tags: z.array(z.string()).default(["others"]),
-    draft: z.boolean().optional(),
+    description: z.string().optional(), // Importante para SEO y resúmenes de BlogCard
+    date: z.date(), // Hacer la fecha obligatoria para ordenar y mostrar
+    image: z.string().optional(), // Imagen destacada para el post
+    author: z.string().default("Dra. Paola Mafla Rosero"), // Autor por defecto
+    categories: z.array(z.string()).default(["Consejos de Ortodoncia"]), // Categoría por defecto relevante
+    tags: z.array(z.string()).optional(), // Hacer los tags opcionales
+    draft: z.boolean().optional().default(false), // Por defecto los posts no son borradores
   }),
 });
 
 // Author collection schema
 const authorsCollection = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/authors" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/autores" }),
   schema: z.object({
     title: z.string(),
     meta_title: z.string().optional(),
@@ -67,13 +67,31 @@ const aboutCollection = defineCollection({
 
 // contact collection schema
 const contactCollection = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/contact" }),
+  loader: glob({ pattern: "-index.{md,mdx}", base: "src/content/contact" }), // Ajustado para que solo tome -index.md o -index.mdx
   schema: z.object({
     title: z.string(),
     meta_title: z.string().optional(),
     description: z.string().optional(),
     image: z.string().optional(),
     draft: z.boolean().optional(),
+    // Nuevos campos para la información de contacto detallada
+    intro_text: z.string().optional(), // Un pequeño texto de bienvenida en la página de contacto
+    phone_number: z.string().optional(),
+    phone_number_display: z.string().optional(), // Para mostrar con formato, ej: (02) 123-4567
+    whatsapp_number: z.string().optional(), // Número completo para el enlace wa.me, ej: 593991234567
+    whatsapp_text: z.string().optional(), // Texto para el botón/enlace de WhatsApp
+    email_address: z.string().email().optional(),
+    full_address: z.string().optional(),
+    opening_hours: z.array(z.string()).optional(), // Un array para listar horarios, ej: ["Lunes a Viernes: 9am - 6pm", "Sábados: 9am - 1pm"]
+    map_embed_code: z.string().optional(), // Para el iframe de Google Maps
+    social_media: z
+      .array(
+        z.object({
+          platform: z.string(), // ej: "Facebook", "Instagram"
+          url: z.string().url(),
+        }),
+      )
+      .optional(),
   }),
 });
 
@@ -118,6 +136,7 @@ const ctaSectionCollection = defineCollection({
     title: z.string(),
     description: z.string(),
     image: z.string(),
+    image_alt: z.string().optional(),
     button: z.object({
       enable: z.boolean(),
       label: z.string(),
@@ -139,11 +158,84 @@ const testimonialSectionCollection = defineCollection({
     testimonials: z.array(
       z.object({
         name: z.string(),
-        avatar: z.string(),
-        designation: z.string(),
+        avatar: z.string().optional(), // Hacer el avatar opcional si no todos los pacientes quieren mostrar foto
+        designation: z.string(), // Podríamos renombrar esto a algo como "Tipo de Tratamiento" o "Paciente de"
         content: z.string(),
+        image_before: z.string().optional(), // Opcional: imagen del "antes"
+        image_after: z.string().optional(), // Opcional: imagen del "después"
       }),
     ),
+  }),
+});
+
+// About collection schema
+const storyCollection = defineCollection({
+  loader: glob({
+    pattern: "story.{md,mdx}",
+    base: "src/content/about/",
+  }),
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string(),
+    cover: z.string(),
+    avatar: z.string(),
+    stats: z.array(
+      z.object({
+        value: z.number(),
+        suffix: z.string(),
+        label: z.string(),
+      }),
+    ),
+    doctor: z.object({
+      name: z.string(),
+      points: z.array(z.string()),
+    }),
+  }),
+});
+
+// About › valores
+const valoresCollection = defineCollection({
+  loader: glob({
+    pattern: "valores.{md,mdx}",
+    base: "src/content/about/",
+  }),
+  schema: z.object({
+    title: z.string(),
+    valores: z.array(
+      z.object({
+        name: z.string(),
+        icon: z.string(),
+        description: z.string(),
+      }),
+    ),
+  }),
+});
+
+const servicesIndexCollection = defineCollection({
+  loader: glob({ pattern: "-index.{md,mdx}", base: "src/content/servicios" }), // Patrón para el archivo -index
+  schema: z.object({
+    title: z.string(),
+    meta_title: z.string().optional(),
+    description: z.string().optional(),
+    image: z.string().optional(),
+    intro_text: z.string().optional(),
+  }),
+});
+
+// Schema para los SERVICIOS INDIVIDUALES (apunta a todos los demás .md en 'servicios')
+const serviceItemsCollection = defineCollection({
+  loader: glob({
+    pattern: "!(-index)*.{md,mdx}", // Patrón para todos los archivos EXCEPTO -index.md
+    base: "src/content/servicios",
+  }),
+  schema: z.object({
+    title: z.string(),
+    short_description: z.string(),
+    icon: z.string().optional(),
+    image: z.string().optional(),
+    // content: z.string(),
+    order: z.number().optional(),
+    draft: z.boolean().optional().default(false),
   }),
 });
 
@@ -152,7 +244,7 @@ export const collections = {
   // Pages
   homepage: homepageCollection,
   blog: blogCollection,
-  authors: authorsCollection,
+  autores: authorsCollection,
   pages: pagesCollection,
   about: aboutCollection,
   contact: contactCollection,
@@ -160,4 +252,12 @@ export const collections = {
   // sections
   ctaSection: ctaSectionCollection,
   testimonialSection: testimonialSectionCollection,
+
+  // about
+  story: storyCollection,
+  valores: valoresCollection,
+
+  // services
+  servicesIndex: servicesIndexCollection, // Para el -index.md de la página de servicios
+  servicios: serviceItemsCollection, // Para los archivos de servicios individuales (ortodoncia.md, etc.)
 };

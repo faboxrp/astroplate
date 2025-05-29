@@ -14,10 +14,7 @@ import { getEntry } from "astro:content";
 const BLOG_FOLDER = "blog";
 
 const { slug } = Astro.params;
-const postIndex = (await getEntry(
-  BLOG_FOLDER,
-  "-index"
-)) as CollectionEntry<"blog">;
+const postIndex = (await getEntry(BLOG_FOLDER, "-index")) as CollectionEntry<"blog">;
 const posts = await getSinglePage(BLOG_FOLDER);
 const allCategories = await getAllTaxonomy(BLOG_FOLDER, "categories");
 const categories = await getTaxonomy(BLOG_FOLDER, "categories");
@@ -46,12 +43,7 @@ export async function getStaticPaths() {
 }
 ---
 
-<Base
-  title={postIndex.data.title}
-  meta_title={postIndex.data.meta_title}
-  image={postIndex.data.image}
-  description={postIndex.data.description}
->
+<Base title={postIndex.data.title} meta_title={postIndex.data.meta_title} image={postIndex.data.image} description={postIndex.data.description}>
   <PageHeader title={postIndex.data.title} />
   <section class="section">
     <div class="container">
@@ -67,19 +59,11 @@ export async function getStaticPaths() {
               ))
             }
           </div>
-          <Pagination
-            section={BLOG_FOLDER}
-            currentPage={currentPage}
-            totalPages={totalPages}
-          />
+          <Pagination section={BLOG_FOLDER} currentPage={currentPage} totalPages={totalPages} />
         </div>
 
         <!-- sidebar -->
-        <PostSidebar
-          categories={categories}
-          tags={tags}
-          allCategories={allCategories}
-        />
+        <PostSidebar categories={categories} tags={tags} allCategories={allCategories} />
       </div>
     </div>
   </section>
