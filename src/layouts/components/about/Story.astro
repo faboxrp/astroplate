@@ -11,7 +11,7 @@ const { title, subtitle, cover, avatar, stats, doctor } = story.data;
   {
     cover && (
       <div class="absolute inset-x-0 top-0 h-60 overflow-hidden pointer-events-none cover-container">
-        <ImageMod src={cover} alt={title} width={1440} height={240} class="h-full w-full object-cover object-center parallax cover-fade" format="webp" />
+        <ImageMod src={cover} alt={title} width={720} height={120} class="h-full w-full object-cover object-center parallax cover-fade" format="webp" />
       </div>
     )
   }
@@ -19,8 +19,9 @@ const { title, subtitle, cover, avatar, stats, doctor } = story.data;
   <div class="container relative mt-48 grid gap-16 lg:grid-cols-2 items-center">
     <!-- Texto -->
     <div class="space-y-8 lg:pr-12 fade-left text-section">
-      <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight
-                 text-darkmode-light dark:text-darkmode-dark title-glow">
+      <h2
+        class="text-3xl md:text-5xl font-extrabold tracking-tight
+                 text-darkmode-light dark:text-darkmode-dark title-glow text-center lg:text-left">
         {title}
       </h2>
 

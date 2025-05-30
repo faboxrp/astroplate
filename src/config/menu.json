@@ -14,28 +14,12 @@
     },
     {
       "name": "Blog",
-      "url": "/blog"
-    },
-    {
-      "name": "Contacto",
-      "url": "/contacto"
-    },
-    {
-      "name": "Pages",
-      "url": "",
+      "url": "/blog",
       "hasChildren": true,
       "children": [
         {
-          "name": "Contacto",
-          "url": "/contacto"
-        },
-        {
-          "name": "Blog",
+          "name": "Todos los artículos",
           "url": "/blog"
-        },
-        {
-          "name": "Autores",
-          "url": "/autores"
         },
         {
           "name": "Categorías",
@@ -46,10 +30,14 @@
           "url": "/tags"
         },
         {
-          "name": "404 Page",
-          "url": "/404"
+          "name": "Autores",
+          "url": "/autores"
         }
       ]
+    },
+    {
+      "name": "Contacto",
+      "url": "/contacto"
     }
   ],
   "footer": [

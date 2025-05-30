@@ -3,7 +3,7 @@ title: "5 Cuidados Esenciales para tus Brackets y Sonrisa Durante la Ortodoncia"
 meta_title: "Cuidados de Brackets | Consejos Ortodoncia OrthoPure"
 description: "Mantener una buena higiene y seguir ciertos cuidados es clave para el éxito de tu tratamiento de ortodoncia. Descubre 5 consejos esenciales de OrthoPure."
 date: 2025-05-28T10:00:00Z 
-image: "/images/image-placeholder.png"
+image: "/images/blog/cuidados-brackets.png"
 categories: ["Cuidados en Ortodoncia", "Higiene Dental"]
 author: "Dra. Paola Mafla Rosero" 
 tags: ["brackets", "limpieza dental", "consejos ortodoncia", "salud bucal"]

@@ -2,7 +2,7 @@
 title: "¡Hola! Somos OrthoPure"
 meta_title: "Nosotros | OrthoPure"
 description: "Ortodoncia y ortopedia funcional con atención verdaderamente personalizada."
-image: "/images/team/paola-mafla.jpg"   # ↳ reemplaza por la ruta real cuando subas la foto
+image: "/images/og-image.png"
 draft: false
 ---
 

@@ -3,7 +3,7 @@ title: "Ortopedia Maxilar en Niños: ¿Cuándo y Por Qué es Importante?"
 meta_title: "Ortopedia Maxilar Infantil | OrthoPure | Dra. Paola Mafla Rosero"
 description: "Descubre qué es la ortopedia maxilar, la edad ideal para una primera revisión y cómo puede beneficiar el desarrollo dental y facial de tus hijos con OrthoPure."
 date: 2023-11-05T11:00:00Z # Ajusta la fecha
-image: "/images/image-placeholder.png"
+image: "/images/blog/ortopedia-maxilar-ninos.png"
 categories: ["Ortopedia Maxilar", "Salud Dental Infantil", "Prevención"]
 author: "Dra. Paola Mafla Rosero"
 tags: ["crecimiento facial", "niños", "desarrollo dental", "mordida", "prevención ortodoncia"]

@@ -4,9 +4,9 @@
     "base_url": "https://orthopure.ec",
     "base_path": "/",
     "trailing_slash": false,
-    "favicon": "/images/favicon.ico",
-    "logo": "/images/logo.png",
-    "logo_darkmode": "/images/logo-darkmode.png",
+    "favicon": "/images/favicon.svg",
+    "logo": "/images/logo.svg",
+    "logo_darkmode": "/images/logo-darkmode.svg",
     "logo_width": "150",
     "logo_height": "30",
     "logo_text": "OrthoPure"
