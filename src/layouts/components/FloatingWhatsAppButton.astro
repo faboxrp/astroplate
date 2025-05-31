@@ -1,0 +1,32 @@
+---
+import { getEntry } from "astro:content";
+import { FaWhatsapp } from "react-icons/fa6";
+const contactEntry = await getEntry("contact", "-index");
+const whatsappNumber = contactEntry?.data.whatsapp_number;
+const whatsappLink = whatsappNumber ? `https://wa.me/${whatsappNumber.replace(/\D/g, "")}` : "#";
+const showButton = !!whatsappNumber;
+---
+
+{
+  showButton && (
+    <a
+      href={whatsappLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Chat on WhatsApp"
+      class="fixed bottom-6 right-6 z-[999] p-3 bg-green-500 text-white rounded-full shadow-xl hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-opacity-50 transition-colors duration-200 flex items-center justify-center group"
+      title="Chatea con nosotros en WhatsApp">
+      <FaWhatsapp className="w-7 h-7 md:w-8 md:h-8" />
+      <span class="absolute right-full mr-2 hidden group-hover:block bg-gray-700 text-white text-xs rounded py-1 px-2 whitespace-nowrap">
+        Chatea en WhatsApp
+      </span>
+    </a>
+  )
+}
+
+<style>
+  /* Ensures the button is above other content that might also use high z-index */
+  .z-\[999\] {
+    z-index: 999;
+  }
+</style>
