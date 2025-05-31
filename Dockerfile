@@ -1,19 +1,18 @@
 ARG INSTALLER=yarn
 
 # --- Etapa Base ---
-FROM node:22.16.0-slim AS base 
+FROM node:20-alpine AS base
 
 # --- Etapa de Dependencias ---
 FROM base AS deps
 ARG INSTALLER
-# Elimina la siguiente línea, ya que 'apk' no existe y libc6-compat no suele ser necesario en Debian/slim.
-# RUN apk add --no-cache libc6-compat 
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json .yarnrc.yml ./
 COPY yarn.lock* package-lock.json* pnpm-lock.yaml* ./ 
 RUN corepack enable
 RUN \
-  if [ "${INSTALLER}" == "yarn" ]; then yarn install; \ 
+  if [ "${INSTALLER}" == "yarn" ]; then yarn install --immutable; \
   elif [ "${INSTALLER}" == "npm" ]; then npm ci; \
   elif [ "${INSTALLER}" == "pnpm" ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
   else echo "Valid installer not set." && exit 1; \
