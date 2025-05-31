@@ -1,7 +1,7 @@
 ARG INSTALLER=yarn
 
 # --- Etapa Base ---
-FROM node:22-alpine-slim AS base
+FROM node:20-alpine AS base
 
 # --- Etapa de Dependencias ---
 FROM base AS deps
