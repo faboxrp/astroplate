@@ -1,7 +1,7 @@
 ARG INSTALLER=yarn
 
 # --- Etapa Base ---
-FROM node:20-alpine AS base
+FROM node:22.16-slim AS base
 
 # --- Etapa de Dependencias ---
 FROM base AS deps
@@ -9,10 +9,10 @@ ARG INSTALLER
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json .yarnrc.yml ./
-COPY yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+COPY yarn.lock* package-lock.json* pnpm-lock.yaml* ./ 
 RUN corepack enable
 RUN \
-  if [ "${INSTALLER}" == "yarn" ]; then yarn --frozen-lockfile; \
+  if [ "${INSTALLER}" == "yarn" ]; then yarn install; \
   elif [ "${INSTALLER}" == "npm" ]; then npm ci; \
   elif [ "${INSTALLER}" == "pnpm" ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
   else echo "Valid installer not set." && exit 1; \
@@ -24,11 +24,7 @@ ARG INSTALLER
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
-# HABILITA COREPACK TAMBIÉN EN LA ETAPA BUILDER ANTES DEL BUILD
-RUN corepack enable # <--- AÑADE ESTA LÍNEA AQUÍ
-
-# RUN chmod u+x ./installer && ./installer # Tu línea original comentada
+RUN corepack enable
 RUN \
   if [ "${INSTALLER}" == "yarn" ]; then yarn build; \
   elif [ "${INSTALLER}" == "npm" ]; then npm run build; \
