@@ -1,17 +1,16 @@
 ARG INSTALLER=yarn
 
+# --- Etapa Base ---
 FROM node:20-alpine AS base
 
-# Install dependencies only when needed
+# --- Etapa de Dependencias ---
 FROM base AS deps
 ARG INSTALLER
-
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-
-# Install dependencies based on the preferred package manager
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+COPY package.json .yarnrc.yml ./
+COPY yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+RUN corepack enable
 RUN \
   if [ "${INSTALLER}" == "yarn" ]; then yarn --frozen-lockfile; \
   elif [ "${INSTALLER}" == "npm" ]; then npm ci; \
@@ -19,15 +18,17 @@ RUN \
   else echo "Valid installer not set." && exit 1; \
   fi
 
-
-# Rebuild the source code only when needed
+# --- Etapa de Compilación (Builder) ---
 FROM base AS builder
+ARG INSTALLER
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# RUN chmod u+x ./installer && ./installer
-ARG INSTALLER
+# HABILITA COREPACK TAMBIÉN EN LA ETAPA BUILDER ANTES DEL BUILD
+RUN corepack enable # <--- AÑADE ESTA LÍNEA AQUÍ
+
+# RUN chmod u+x ./installer && ./installer # Tu línea original comentada
 RUN \
   if [ "${INSTALLER}" == "yarn" ]; then yarn build; \
   elif [ "${INSTALLER}" == "npm" ]; then npm run build; \
@@ -35,9 +36,10 @@ RUN \
   else echo "Valid installer not set." && exit 1; \
   fi
 
-# Production image, copy all the files and run nginx
+# --- Etapa de Producción (Runner) ---
 FROM nginx:alpine AS runner
 COPY ./config/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /app/dist /usr/share/nginx/html
-
 WORKDIR /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
