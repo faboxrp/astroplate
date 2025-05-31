@@ -239,6 +239,31 @@ const serviceItemsCollection = defineCollection({
   }),
 });
 
+const galleryCollection = defineCollection({
+  // No necesitas 'loader' aquí si vas a usar getCollection directamente
+  // y los archivos están en src/content/galeria/
+  type: "content", // o 'data' si solo es frontmatter sin cuerpo Markdown principal
+  schema: z.object({
+    title: z.string(),
+    meta_title: z.string().optional(),
+    description: z.string().optional(),
+    // Imagen principal de la página de galería, si la tiene
+    header_image: z.string().optional(),
+    draft: z.boolean().optional().default(false),
+    // Array para los ítems de la galería
+    gallery_items: z
+      .array(
+        z.object({
+          image_url: z.string(), // Ruta a la imagen
+          alt_text: z.string(), // Texto alternativo
+          caption: z.string().optional(), // Leyenda opcional
+          category: z.string().optional(), // Categoría para filtrar (opcional)
+        }),
+      )
+      .optional(),
+  }),
+});
+
 // Export collections
 export const collections = {
   // Pages
@@ -260,4 +285,7 @@ export const collections = {
   // services
   servicesIndex: servicesIndexCollection, // Para el -index.md de la página de servicios
   servicios: serviceItemsCollection, // Para los archivos de servicios individuales (ortodoncia.md, etc.)
+
+  // gallery
+  galeria: galleryCollection,
 };

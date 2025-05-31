@@ -36,6 +36,10 @@
       ]
     },
     {
+      "name": "Galería",
+      "url": "/galeria"
+    },
+    {
       "name": "Contacto",
       "url": "/contacto"
     }
