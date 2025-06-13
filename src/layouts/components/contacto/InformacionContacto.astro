@@ -1,0 +1,131 @@
+---
+// src/layouts/components/contacto/InformacionContacto.astro
+import { Icon } from "astro-iconify";
+
+interface Props {
+  data: {
+    full_address?: string;
+    phone_number?: string;
+    phone_number_display?: string;
+    whatsapp_number?: string;
+    whatsapp_text?: string;
+    email_address?: string;
+    opening_hours?: string[];
+    map_embed_code?: string;
+  };
+}
+const { data } = Astro.props;
+---
+
+<div>
+  <h2 class="h3 mb-6 font-semibold">Información de Contacto</h2>
+  <ul class="space-y-4 contact-info">
+    {
+      data.full_address && (
+        <li class="flex items-start">
+          <Icon name="mdi:map-marker-outline" class="h-6 w-6 mr-3 mt-1 text-primary dark:text-darkmode-primary" />
+          <div>
+            <>
+              <strong class="text-primary dark:text-darkmode-primary">Dirección:</strong>
+              <br />
+            </>
+            {data.full_address}
+          </div>
+        </li>
+      )
+    }
+    {
+      data.phone_number && data.phone_number_display && (
+        <li class="flex items-start">
+          <Icon name="mdi:phone-outline" class="h-6 w-6 mr-3 mt-1 text-primary dark:text-darkmode-primary" />
+          <div>
+            <>
+              <strong class="text-primary dark:text-darkmode-primary">Teléfono:</strong>
+              <br />
+            </>
+            <a href={`tel:${data.phone_number}`} class="hover:underline">
+              {data.phone_number_display}
+            </a>
+          </div>
+        </li>
+      )
+    }
+    {
+      data.whatsapp_number && (
+        <li class="flex items-start">
+          <Icon name="mdi:whatsapp" class="h-6 w-6 mr-3 mt-1 text-primary dark:text-darkmode-primary" />
+          <div>
+            <>
+              <strong class="text-primary dark:text-darkmode-primary">WhatsApp:</strong>
+              <br />
+            </>
+            <a href={`https://wa.me/${data.whatsapp_number}`} target="_blank" rel="noopener noreferrer" class="hover:underline">
+              {data.whatsapp_text || `Chatear por WhatsApp`}
+            </a>
+          </div>
+        </li>
+      )
+    }
+    {
+      data.email_address && (
+        <li class="flex items-start">
+          <Icon name="mdi:email-outline" class="h-6 w-6 mr-3 mt-1 text-primary dark:text-darkmode-primary" />
+          <div>
+            <>
+              <strong class="text-primary dark:text-darkmode-primary">Email:</strong>
+              <br />
+            </>
+            <a href={`mailto:${data.email_address}`} class="hover:underline">
+              {data.email_address}
+            </a>
+          </div>
+        </li>
+      )
+    }
+  </ul>
+
+  {
+    data.opening_hours && data.opening_hours.length > 0 && (
+      <div class="mt-8">
+        <h3 class="h4 mb-4 font-semibold">Horario de Atención</h3>
+        <ul class="space-y-2">
+          {data.opening_hours.map((line) => (
+            <li class="flex items-center">
+              <Icon name="mdi:clock-outline" class="h-5 w-5 mr-2 text-gray-600 dark:text-gray-400" />
+              {line}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
+  {
+    data.map_embed_code && (
+      <div class="mt-8">
+        <h3 class="h4 mb-4 font-semibold">Nuestra Ubicación</h3>
+        <div class="aspect-w-16 aspect-h-9 map-responsive">
+          <Fragment set:html={data.map_embed_code} />
+        </div>
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .map-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+    width: 100%;
+  }
+  .map-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border: 0;
+  }
+</style>

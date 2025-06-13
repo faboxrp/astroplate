@@ -1,10 +1,11 @@
 ---
 # Banner (Hero Section)
 banner:
-  title: "Transformando vidas a traves de sonrisas"
+  title: "Transformando vidas a través de sonrisas"
   # title: "OrthoPure: Creamos Sonrisas, Transformamos Vidas"
-  content: "Expertos en **ortodoncia y ortopedia maxilar.** ¡Agenda tu cita hoy mismo!"
+  content: "Expertos en **ortodoncia y ortopedia maxilar.**  \n¡Agenda tu cita hoy mismo!"
   image: "/images/banner-orthopure.png" # Placeholder: Sugerencia: Dra. Paola sonriendo, ambiente acogedor del consultorio, o una sonrisa radiante.
+  image_darkmode: "/images/banner-orthopure-dark.png"
   button:
     enable: true
     label: "Agenda tu Cita"

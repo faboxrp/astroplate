@@ -22,58 +22,47 @@ const allServices = allServicesUnfiltered.filter((entry: CollectionEntry<Service
 const sortedServices = sortByOrder(allServices);
 
 const call_to_action = (await getEntry("ctaSection", "call-to-action")) as CollectionEntry<CtaSectionCollectionName>;
-
-// Variable para decidir el fondo de la sección de intro_text
-const introSectionBgClass: string = "bg-body"; // Opción 1: Fondo del body (#FFFFF2)
-// const introSectionBgClass: string = "bg-light"; // Opción 2: Fondo 'light' (#FCE8FB o #FDD7F4)
-// const introSectionBgClass: string = "bg-gray-dark"; // Opción 3: Fondo 'gray-dark' (#505050)
-
-// Variable para el color del texto de intro_text, dependiente del fondo
-let introTextColorClass = "text-text"; // Color de texto por defecto
-if (introSectionBgClass === "bg-gray-dark") {
-  introTextColorClass = "text-text-on-gray-dark"; // Será #FFFFF2
-} else if (introSectionBgClass === "bg-light") {
-  introTextColorClass = "text-text"; // El text-text (#4D0070) debería contrastar bien con bg-light
-}
 ---
 
 <Base title={title} meta_title={meta_title} description={description} image={image}>
-  {/* PageHeader usa su propio estilo, probablemente bg-primary */}
-  <PageHeader title={title} />
+  <div class="bg-pattern-mosaico">
+    {/* Aplicar clase de fondo dinámico */}
+    <PageHeader title={title} />
 
-  {
-    intro_text && (
-      <section class:list={["section-sm", introSectionBgClass]}>
-        {" "}
-        {/* Aplicar clase de fondo dinámico */}
-        <div class="container text-center md:col-10 lg:col-8 mx-auto">
-          {/* Aplicar clase de color de texto dinámico y estilos de prose */}
-          <div class:list={["prose dark:prose-invert max-w-none text-lg", introTextColorClass]} set:html={markdownify(intro_text)} />
-        </div>
-      </section>
-    )
-  }
+    {
+      intro_text && (
+        <section class={"section-sm"}>
+          {" "}
+          {/* Aplicar clase de fondo dinámico */}
+          <div class="container text-center md:col-10 lg:col-8 mx-auto">
+            {/* Aplicar clase de color de texto dinámico y estilos de prose */}
+            <div class="max-w-none text-lg" set:html={markdownify(intro_text)} />
+          </div>
+        </section>
+      )
+    }
 
-  {
-    sortedServices.length > 0 ? (
-      sortedServices.map((service, index) => (
-        <ServiceItem service={service} index={index} /> // ServiceItem maneja su alternancia de bg-gradient
-      ))
-    ) : (
-      <section class="section-sm bg-body">
-        {" "}
-        {/* Fondo del body por defecto */}
-        <div class="container text-center">
-          <p class="text-lg text-text">
-            {" "}
-            {/* Color de texto por defecto */}
-            Próximamente encontrarás aquí información detallada sobre nuestros servicios. ¡Gracias por tu paciencia!
-          </p>
-        </div>
-      </section>
-    )
-  }
+    {
+      sortedServices.length > 0 ? (
+        sortedServices.map((service, index) => (
+          <ServiceItem service={service} index={index} /> // ServiceItem maneja su alternancia de bg-gradient
+        ))
+      ) : (
+        <section class="section-sm bg-body">
+          {" "}
+          {/* Fondo del body por defecto */}
+          <div class="container text-center">
+            <p class="text-lg text-text">
+              {" "}
+              {/* Color de texto por defecto */}
+              Próximamente encontrarás aquí información detallada sobre nuestros servicios. ¡Gracias por tu paciencia!
+            </p>
+          </div>
+        </section>
+      )
+    }
 
-  {/* CallToAction usa sus propios estilos (bg-light por defecto) */}
-  <CallToAction call_to_action={call_to_action} />
+    {/* CallToAction usa sus propios estilos (bg-light por defecto) */}
+    <CallToAction call_to_action={call_to_action} />
+  </div>
 </Base>

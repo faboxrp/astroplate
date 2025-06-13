@@ -15,7 +15,7 @@ const { tags, categories, allCategories } = Astro.props;
             const count = allCategories.filter((c: any) => c === category).length;
             return (
               <li>
-                <a class="flex justify-between hover:text-primary dark:hover:text-darkmode-primary" href={`/categories/${category}`}>
+                <a class="flex justify-between hover:text-primary dark:hover:text-darkmode-primary" href={`/categorias/${category}`}>
                   {humanize(category)} <span>({count})</span>
                 </a>
               </li>

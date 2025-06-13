@@ -26,7 +26,7 @@ const IconComponent = getIcon(icon);
 const isEven = index % 2 === 0;
 ---
 
-<section class={`section-sm service-item ${isEven ? "bg-gradient" : ""}`}>
+<section class={`section-sm service-item ${isEven ? "bg-pattern-mosaico" : ""}`}>
   <div class="container">
     <div class="row items-center justify-between">
       <div class:list={["mb:md-0 mb-6 md:col-5", { "md:order-2": !isEven }]}>
@@ -34,7 +34,7 @@ const isEven = index % 2 === 0;
       </div>
       <div class:list={["md:col-7 lg:col-6", { "md:order-1": !isEven }]}>
         <div class="flex items-center mb-4">
-          {IconComponent && <IconComponent className="h-10 w-10 mr-3 flex-shrink-0" />}
+          {IconComponent && <IconComponent className="h-10 w-10 mr-3 flex-shrink-0 text-primary dark:text-darkmode-primary" />}
           <h2 set:html={markdownify(title)} class="h3" />
         </div>
         <p set:html={markdownify(short_description)} class="mb-6 text-lg leading-relaxed" />

@@ -10,3 +10,56 @@
 @utility form-label {
   @apply mb-4 block font-secondary text-xl font-normal text-text-dark dark:text-darkmode-text-light;
 }
+
+/* ========= TUS NUEVAS CLASES PERSONALIZADAS ========= */
+
+/* Mantenemos la directiva @utility para las definiciones simples,
+   para ser consistentes con el resto del tema. */
+@utility bg-pattern-mosaico {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)),
+    url("/images/banner.svg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* Variante para modo oscuro */
+@layer utilities {
+  .dark .bg-pattern-mosaico {
+    background-image:
+      linear-gradient(rgba(59, 0, 86, 0.85), rgba(59, 0, 86, 0.85)),
+      url("/images/banner.svg");
+  }
+}
+
+@utility bg-pattern-mosaico-degradado {
+  /* Hacemos que el degradado vaya de transparente a tu color de fondo ('body')
+       El degradado comenzará a notarse al 20% y será sólido al 60% */
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 242, 0) 20%,
+      /* El color de 'body' (#FFFFF2) transparente */ rgba(255, 255, 242, 1) 60%
+        /* El color de 'body' sólido */
+    ),
+    url("/images/banner.svg");
+  background-repeat: repeat;
+}
+
+/* AHORA, LA VARIANTE PARA MODO OSCURO */
+/* Esto se debe definir como una regla de CSS normal, fuera de @utility.
+     Tailwind la procesará correctamente. */
+@layer utilities {
+  .dark .bg-pattern-mosaico-degradado {
+    /* El color de tu 'body' en darkmode es #3B0056 */
+    background-image:
+      linear-gradient(
+        to bottom,
+        rgba(59, 0, 86, 0) 20%,
+        /* El color de 'body' darkmode transparente */ rgba(59, 0, 86, 1) 60%
+          /* El color de 'body' darkmode sólido */
+      ),
+      url("/images/banner.svg");
+  }
+}

@@ -12,18 +12,20 @@ const authors = await getSinglePage(COLLECTION_FOLDER);
 ---
 
 <Base title={authorIndex.data.title}>
-  <PageHeader title={authorIndex.data.title} />
-  <section class="section-sm pb-0">
-    <div class="container">
-      <div class="row justify-center">
-        {
-          authors.map((author) => (
-            <div class="mb-14 md:col-6 lg:col-4">
-              <AuthorCard data={author} />
-            </div>
-          ))
-        }
+  <div class="bg-pattern-mosaico">
+    <PageHeader title={authorIndex.data.title} />
+    <section class="section-sm pb-0">
+      <div class="container">
+        <div class="row justify-center">
+          {
+            authors.map((author) => (
+              <div class="mb-14 md:col-6 lg:col-4">
+                <AuthorCard data={author} />
+              </div>
+            ))
+          }
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </Base>

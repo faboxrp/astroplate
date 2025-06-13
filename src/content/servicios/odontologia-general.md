@@ -1,7 +1,7 @@
 ---
 title: "Odontología General y Preventiva"
 short_description: "Cuidamos de tu salud bucal integral con revisiones, limpiezas profesionales, y tratamientos preventivos para mantener tu sonrisa sana."
-icon: "ShieldCheck" # Placeholder icon name
+icon: "ScanFace" # Icono representativo de odontología general
 image: "/images/services/orthopure-odontologia-general.jpg" # Placeholder
 order: 3
 draft: false

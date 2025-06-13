@@ -5,7 +5,7 @@ const path = require("path");
   const rootDirs = ["src/pages", "src/hooks", "src/layouts", "src/styles"];
 
   const deleteAssetList = [
-    "public/images/logo-darkmode.png",
+    "public/images/logo-darkmode.svg",
     "src/layouts/components/ThemeSwitcher.astro",
   ];
 

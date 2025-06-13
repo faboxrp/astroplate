@@ -2,8 +2,7 @@
 import config from "@/config/config.json";
 import ImageMod from "./ImageMod.astro";
 
-const { src, srcDarkmode }: { src?: string; srcDarkmode?: string } =
-  Astro.props;
+const { src, srcDarkmode }: { src?: string; srcDarkmode?: string } = Astro.props;
 const {
   logo,
   logo_darkmode,
@@ -38,6 +37,7 @@ const { theme_switcher }: { theme_switcher: boolean } = config.settings;
             width: logo_width.replace("px", "") + "px",
           }}
           format="webp"
+          loading="eager"
         />
         {theme_switcher && (
           <ImageMod
@@ -51,6 +51,7 @@ const { theme_switcher }: { theme_switcher: boolean } = config.settings;
               width: logo_width.replace("px", "") + "px",
             }}
             format="webp"
+            loading="eager"
           />
         )}
       </>

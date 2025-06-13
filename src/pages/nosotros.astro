@@ -4,6 +4,8 @@ import Story from "@/components/about/Story.astro";
 import Valores from "@/components/about/Valores.astro";
 import Base from "@/layouts/Base.astro";
 import CallToAction from "@/partials/CallToAction.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+import InformacionContacto from "@/components/contacto/InformacionContacto.astro";
 
 import type { CollectionEntry } from "astro:content";
 import { getEntry } from "astro:content";
@@ -11,11 +13,20 @@ import { getEntry } from "astro:content";
 const about = (await getEntry("about", "hero")) as CollectionEntry<"about">;
 const { title, meta_title, description, image } = about.data;
 
+const contactPageData = await getEntry("contact", "-index");
+
 const call_to_action = (await getEntry("ctaSection", "call-to-action")) as CollectionEntry<"ctaSection">;
 ---
 
 <Base title={title} meta_title={meta_title} description={description} image={image}>
-  <Story className="fade-up opacity-100 motion-safe:opacity-0" />
-  <Valores />
-  <CallToAction call_to_action={call_to_action} />
+  <div class="bg-pattern-mosaico">
+    <PageHeader title={title} image={image} />
+    <Story className="fade-up opacity-100 motion-safe:opacity-0" />
+    <Valores />
+    <div class="flex justify-center mb-8">
+      {contactPageData && <InformacionContacto data={contactPageData.data} class:list={"center"} />}
+    </div>
+
+    <CallToAction call_to_action={call_to_action} />
+  </div>
 </Base>

@@ -8,9 +8,24 @@ const { title, image, social } = data.data;
 ---
 
 <div class="rounded bg-light p-8 text-center dark:bg-darkmode-light">
-  {image && <ImageMod class="mx-auto mb-6 rounded" src={image} alt={title} width={120} height={120} format="webp" />}
+  {
+    image && (
+      <a href={`/autores/${data.id}`} class="group inline-block">
+        <ImageMod
+          class="mx-auto mb-6 rounded transition-transform duration-200 group-hover:scale-105 group-hover:shadow-lg"
+          src={image}
+          alt={title}
+          width={120}
+          height={120}
+          format="webp"
+        />
+      </a>
+    )
+  }
   <h4 class="mb-3">
-    <a href={`/autores/${data.id}`}>{title}</a>
+    <a href={`/autores/${data.id}`} class="transition-colors duration-200 hover:text-primary underline-offset-2 hover:underline">
+      {title}
+    </a>
   </h4>
   <p class="mb-4">
     {plainify(data.body?.slice(0, 100))}

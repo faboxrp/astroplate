@@ -2,7 +2,7 @@
 title: "Nuestra Galería de Sonrisas"
 meta_title: "Galería de Fotos - OrthoPure"
 description: "Explora las transformaciones y sonrisas creadas en OrthoPure."
-header_image: "/images/banners/gallery-banner.jpg" # Opcional
+header_image: "/images/gallery/instalacion1.jpg" # Opcional
 draft: false
 gallery_items:
   - image_url: "/images/gallery/instalacion1.jpg"

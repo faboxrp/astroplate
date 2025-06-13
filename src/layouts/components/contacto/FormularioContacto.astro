@@ -1,0 +1,36 @@
+---
+// src/layouts/components/contacto/FormularioContacto.astro
+interface Props {
+  action: string;
+}
+const { action } = Astro.props;
+---
+
+<div class="lg:col-6">
+  <h2 class="h3 mb-6 font-semibold">Envíanos un Mensaje</h2>
+  <form action={action} method="POST">
+    <div class="mb-6">
+      <label for="name" class="form-label text-primary dark:text-darkmode-primary">
+        Nombre Completo <span class="text-red-500">*</span>
+      </label>
+      <input id="name" name="name" class="form-input" placeholder="Ej: María Pérez" type="text" required />
+    </div>
+    <div class="mb-6">
+      <label for="email" class="form-label text-primary dark:text-darkmode-primary">
+        Correo Electrónico <span class="text-red-500">*</span>
+      </label>
+      <input id="email" name="email" class="form-input" placeholder="Ej: maria.perez@correo.com" type="email" required />
+    </div>
+    <div class="mb-6">
+      <label for="phone" class="form-label text-primary dark:text-darkmode-primary"> Teléfono (Opcional) </label>
+      <input id="phone" name="phone" class="form-input" placeholder="Ej: 0991234567" type="tel" />
+    </div>
+    <div class="mb-6">
+      <label for="message" class="form-label text-primary dark:text-darkmode-primary">
+        Tu Mensaje <span class="text-red-500">*</span>
+      </label>
+      <textarea id="message" name="message" class="form-input" placeholder="Escribe aquí tu consulta..." rows="6" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
+  </form>
+</div>

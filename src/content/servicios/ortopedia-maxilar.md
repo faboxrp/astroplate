@@ -1,7 +1,7 @@
 ---
 title: "Ortopedia Maxilar Infantil"
 short_description: "Guiamos el correcto crecimiento y desarrollo de los maxilares en niños para prevenir problemas futuros y asegurar una base facial armónica."
-icon: "Bone" # Placeholder icon name
+icon: "Sparkles" # Icono apropiado para ortopedia maxilar infantil
 image: "/images/services/orthopure-ortopedia.jpg" # Placeholder
 order: 2
 draft: false

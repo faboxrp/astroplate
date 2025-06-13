@@ -1,202 +1,35 @@
 ---
+// Importaciones
 import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
 import PageHeader from "@/partials/PageHeader.astro";
 import { getEntry } from "astro:content";
-import type { CollectionEntry } from "astro:content";
-import { Icon } from "astro-iconify";
 import { markdownify } from "@/lib/utils/textConverter";
-// import Social from "@/components/Social.astro"; // social.main not used in this version
-// import social from "@/config/social.json"; // social.main not used in this version
+import InformacionContacto from "@/layouts/components/contacto/InformacionContacto.astro";
+import FormularioContacto from "@/layouts/components/contacto/FormularioContacto.astro";
 
-const contactPageData = (await getEntry("contact", "-index")) as CollectionEntry<"contact">;
-
-const {
-  title,
-  meta_title,
-  description,
-  image,
-  intro_text,
-  phone_number,
-  phone_number_display,
-  whatsapp_number,
-  whatsapp_text,
-  email_address,
-  full_address,
-  opening_hours,
-  map_embed_code,
-  // social_media, // This is from contactPageData.data, not used if the Siguenos block below is commented
-} = contactPageData.data;
-
-const { contact_form_action }: { contact_form_action: string } = config.params;
+// Lógica para obtener datos
+const contactPageData = await getEntry("contact", "-index");
+const { title, meta_title, description, image, intro_text } = contactPageData?.data || {};
+const { contact_form_action } = config.params;
 ---
 
 <Base title={title} meta_title={meta_title} description={description} image={image}>
-  <PageHeader title={title} />
-  <section class="section-sm">
-    <div class="container">
-      {intro_text && <div class="mb-12 text-center prose dark:prose-invert max-w-none sm:prose-lg" set:html={markdownify(intro_text)} />}
+  <div class="bg-pattern-mosaico">
+    <PageHeader title={title} />
+    <section class="section-sm">
+      <div class="container">
+        {intro_text && <div class="mb-12 text-center max-w-none sm:prose-lg" set:html={markdownify(intro_text)} />}
+        <div class="row gy-5 lg:gy-0">
+          {/* Se añade un div contenedor que define el layout de columna */}
+          <div class="lg:col-6">
+            {contactPageData && <InformacionContacto data={contactPageData.data} />}
+          </div>
 
-      <div class="row gy-5 lg:gy-0">
-        <!-- Columna de Información de Contacto, Horarios, Mapa -->
-        <div class="lg:col-6">
-          <h2 class="h3 mb-6 font-semibold text-primary dark:text-darkmode-primary">Información de Contacto</h2>
-          <ul class="space-y-4 contact-info">
-            {
-              full_address && (
-                <li class="flex items-start">
-                  <Icon name="mdi:map-marker-outline" class="h-6 w-6 mr-3 mt-1 text-primary dark:text-darkmode-primary" />
-                  <div>
-                    <>
-                      <strong class="text-primary dark:text-darkmode-primary">Dirección:</strong>
-                      <br />
-                    </>
-                    {full_address} {/* This text will inherit color, should be darkmode.text_color.text or text-light */}
-                  </div>
-                </li>
-              )
-            }
-            {
-              phone_number && phone_number_display && (
-                <li class="flex items-start">
-                  <Icon name="mdi:phone-outline" class="h-6 w-6 mr-3 mt-1 text-primary dark:text-darkmode-primary" />
-                  <div>
-                    <>
-                      <strong class="text-primary dark:text-darkmode-primary">Teléfono:</strong>
-                      <br />
-                    </>
-                    <a href={`tel:${phone_number}`} class="hover:underline">
-                      {phone_number_display}
-                    </a>
-                  </div>
-                </li>
-              )
-            }
-            {
-              whatsapp_number && (
-                <li class="flex items-start">
-                  <Icon name="mdi:whatsapp" class="h-6 w-6 mr-3 mt-1 text-primary dark:text-darkmode-primary" />
-                  <div>
-                    <>
-                      <strong class="text-primary dark:text-darkmode-primary">WhatsApp:</strong>
-                      <br />
-                    </>
-                    <a href={`https://wa.me/${whatsapp_number}`} target="_blank" rel="noopener noreferrer" class="hover:underline">
-                      {whatsapp_text || `Chatear por WhatsApp (+${whatsapp_number.slice(0, 3)}...`}
-                    </a>
-                  </div>
-                </li>
-              )
-            }
-            {
-              email_address && (
-                <li class="flex items-start">
-                  <Icon name="mdi:email-outline" class="h-6 w-6 mr-3 mt-1 text-primary dark:text-darkmode-primary" />
-                  <div>
-                    <>
-                      <strong class="text-primary dark:text-darkmode-primary">Email:</strong>
-                      <br />
-                    </>
-                    <a href={`mailto:${email_address}`} class="hover:underline">
-                      {email_address}
-                    </a>
-                  </div>
-                </li>
-              )
-            }
-          </ul>
-
-          {
-            opening_hours && opening_hours.length > 0 && (
-              <div class="mt-8">
-                <h3 class="h4 mb-4 font-semibold text-primary dark:text-darkmode-primary">Horario de Atención</h3>
-                <ul class="space-y-2">
-                  {opening_hours.map((line) => (
-                    <li class="flex items-center">
-                      <Icon name="mdi:clock-outline" class="h-5 w-5 mr-2 text-gray-600 dark:text-gray-400" /> {/* Standard gray icon is fine here */}
-                      {line}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )
-          }
-
-          {
-            map_embed_code && (
-              <div class="mt-8">
-                <h3 class="h4 mb-4 font-semibold text-primary dark:text-darkmode-primary">Nuestra Ubicación</h3>
-                <div class="aspect-w-16 aspect-h-9 map-responsive">
-                  <Fragment set:html={map_embed_code} />
-                </div>
-              </div>
-            )
-          }
-        </div>
-
-        <!-- Columna del Formulario de Contacto -->
-        <div class="lg:col-6">
-          <h2 class="h3 mb-6 font-semibold text-primary dark:text-darkmode-primary">Envíanos un Mensaje</h2>
-          <form action={contact_form_action} method="POST">
-            <div class="mb-6">
-              {/* MODIFICATION: Added text-text to use standard theme text color */}
-              <label for="name" class="form-label text-primary dark:text-darkmode-primary">
-                Nombre Completo <span class="text-red-500">*</span>
-              </label>
-              <input id="name" name="name" class="form-input" placeholder="Ej: María Pérez" type="text" required />
-            </div>
-            <div class="mb-6">
-              <label for="email" class="form-label text-primary dark:text-darkmode-primary">
-                Correo Electrónico <span class="text-red-500">*</span>
-              </label>
-              <input id="email" name="email" class="form-input" placeholder="Ej: maria.perez@correo.com" type="email" required />
-            </div>
-            <div class="mb-6">
-              <label for="phone" class="form-label text-primary dark:text-darkmode-primary"> Teléfono (Opcional) </label>
-              <input id="phone" name="phone" class="form-input" placeholder="Ej: 0991234567" type="tel" />
-            </div>
-            <div class="mb-6">
-              <label for="message" class="form-label text-primary dark:text-darkmode-primary">
-                Tu Mensaje <span class="text-red-500">*</span>
-              </label>
-              <textarea id="message" name="message" class="form-input" placeholder="Escribe aquí tu consulta o el motivo de tu contacto..." rows="6" required>
-              </textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
-          </form>
-
-          {/* "Síguenos" section as per your provided code (commented out) */}
-          {
-            /* {
-            contactPageData.data.social_media && contactPageData.data.social_media.length > 0 && ( // Corrected to use contactPageData.data
-              <div class="mt-8">
-                <h3 class="h4 mb-4 font-semibold text-primary dark:text-darkmode-primary">Síguenos</h3>
-                <Social source={social.main} className="social-icons" /> // Note: social.main is from a different config
-              </div>
-            )
-          } */
-          }
+          {/* El formulario ya tenía un contenedor, así que está bien */}
+          <FormularioContacto action={contact_form_action} />
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </Base>
-
-<style>
-  .map-responsive {
-    overflow: hidden;
-    padding-bottom: 56.25%; /* Proporción 16:9 */
-    position: relative;
-    height: 0;
-    width: 100%;
-  }
-  .map-responsive iframe {
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    border: 0;
-  }
-  /* Removed .contact-info strong styling as it's now handled by Tailwind classes on strong tag itself */
-</style>

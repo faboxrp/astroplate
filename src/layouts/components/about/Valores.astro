@@ -9,11 +9,10 @@ const { title, valores } = data;
 const getIcon = (name: string): LucideIcon => (Icons as unknown as Record<string, LucideIcon>)[name] ?? Icons.Sparkles;
 ---
 
-<section data-component="valores" class="relative isolate overflow-hidden py-24 bg-gradient-to-b
-                from-primary/5 to-background dark:from-primary/10">
+<section data-component="valores" class="relative isolate overflow-hidden py-24">
   <div class="container relative space-y-12">
     <h2 class="text-center text-3xl md:text-4xl font-extrabold tracking-tight
-               text-darkmode-light dark:text-darkmode-dark fade-up section-title title-reveal">
+               fade-up section-title title-reveal">
       {title}
     </h2>
 

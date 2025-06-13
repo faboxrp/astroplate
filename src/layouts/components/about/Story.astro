@@ -6,24 +6,17 @@ const story = (await getEntry("story", "story")) as CollectionEntry<"story">;
 const { title, subtitle, cover, avatar, stats, doctor } = story.data;
 ---
 
-<section data-component="story" class="relative isolate overflow-hidden py-28 bg-gradient-to-b from-primary/5 to-background dark:from-primary/10">
+<section data-component="story" class="relative isolate overflow-hidden py-14">
   <!-- Cover parallax con animación CSS -->
-  {
-    cover && (
-      <div class="absolute inset-x-0 top-0 h-60 overflow-hidden pointer-events-none cover-container">
-        <ImageMod src={cover} alt={title} width={720} height={120} class="h-full w-full object-cover object-center parallax cover-fade" format="webp" />
-      </div>
-    )
-  }
 
-  <div class="container relative mt-48 grid gap-16 lg:grid-cols-2 items-center">
+  <div class="container relative grid gap-16 lg:grid-cols-2 items-center">
     <!-- Texto -->
     <div class="space-y-8 lg:pr-12 fade-left text-section">
-      <h2
+      <!-- <h2
         class="text-3xl md:text-5xl font-extrabold tracking-tight
                  text-darkmode-light dark:text-darkmode-dark title-glow text-center lg:text-left">
         {title}
-      </h2>
+      </h2> -->
 
       <p class="text-lg leading-relaxed text-muted-foreground subtitle-slide" set:html={subtitle} />
 
@@ -70,6 +63,7 @@ const { title, subtitle, cover, avatar, stats, doctor } = story.data;
             height={520}
             class="aspect-[3/4] w-full max-w-sm rounded-[2rem] object-cover shadow-2xl avatar-image hover-rotate"
             format="webp"
+            loading="eager"
           />
         </div>
       )

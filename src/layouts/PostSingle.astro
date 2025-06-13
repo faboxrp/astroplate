@@ -31,15 +31,17 @@ const authorSlug = author === "Admin" || !author ? slugify(mainAuthorName) : slu
   <div class="container">
     <div class="row justify-center">
       <article class="lg:col-10">
+        <h1 set:html={markdownify(title)} class="h2 mb-4" />
         {
           image && (
-            <div class="mb-10">
-              <ImageMod src={image} height={500} width={1200} alt={title} class="w-full rounded" format="webp" />
+            <div class="mb-10 flex justify-center">
+              <ImageMod src={image} height={250} width={600} alt={title} class="rounded" format="webp" />
             </div>
           )
         }
-        <h1 set:html={markdownify(title)} class="h2 mb-4" />
-        <ul class="mb-4">
+        <ul class="text-primary dark:text-darkmode-text-light flex justify-center">
+          {/* Mostrar el autor, categorías y fecha */}
+          {/* Si hay más de un autor, mostrar como enlace a la página de autores */}
           <li class="mr-4 inline-block">
             {/* Enlace al autor. Si solo hay uno, podría no ser un enlace o enlazar a la página "Nosotros" */}
             <a href={`/autores/${authorSlug}`}>
@@ -51,7 +53,7 @@ const authorSlug = author === "Admin" || !author ? slugify(mainAuthorName) : slu
             <FaRegFolder className={"mr-2 -mt-1 inline-block"} />
             {
               categories.map((category: string, index: number) => (
-                <a href={`/categories/${slugify(category)}`} class="hover:text-primary">
+                <a href={`/categorias/${slugify(category)}`} class="hover:text-primary">
                   {humanize(category)}
                   {index !== categories.length - 1 && ", "}
                 </a>
@@ -67,7 +69,7 @@ const authorSlug = author === "Admin" || !author ? slugify(mainAuthorName) : slu
             )
           }
         </ul>
-        <div class="content mb-10 prose dark:prose-invert max-w-none sm:prose-lg">
+        <div class="content mb-10 max-w-none sm:prose-lg mt-8">
           {/* Aplicar clases de prose para el contenido del blog */}
           <Content />
         </div>
