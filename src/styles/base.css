@@ -59,3 +59,16 @@ code {
 blockquote > p {
   @apply my-0!;
 }
+
+/* ========= STICKY FOOTER FIX ========= */
+/* Hacemos que el body sea un contenedor flex vertical */
+body {
+  @apply flex flex-col;
+  min-height: 100vh;
+}
+
+/* Hacemos que el contenido principal crezca para ocupar el espacio disponible */
+/* Esto asume que tu contenido principal está en una etiqueta <main> */
+main {
+  @apply flex-grow;
+}

@@ -21,7 +21,7 @@
     "blog_folder": "blog"
   },
   "params": {
-    "contact_form_action": "#",
+    "contact_form_action": "https://n8n.datospublicosec.com/webhook/7894ccd7-efb8-4506-abd8-85e6f35a48a4",
     "copyright": "Diseñado y Desarrollado por [Smartdataec](https://smartdataec.com)"
   },
   "navigation_button": {
