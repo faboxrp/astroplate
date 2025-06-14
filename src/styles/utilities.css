@@ -21,7 +21,7 @@
     url("/images/banner.svg");
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  /* background-attachment: fixed; */
 }
 
 /* Variante para modo oscuro */
