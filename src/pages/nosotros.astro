@@ -23,8 +23,8 @@ const call_to_action = (await getEntry("ctaSection", "call-to-action")) as Colle
     <PageHeader title={title} image={image} />
     <Story className="fade-up opacity-100 motion-safe:opacity-0" />
     <Valores />
-    <div class="flex justify-center mb-8">
-      {contactPageData && <InformacionContacto data={contactPageData.data} class:list={"center"} />}
+    <div class="flex justify-center mb-12">
+      {contactPageData && <InformacionContacto data={contactPageData.data} />}
     </div>
 
     <CallToAction call_to_action={call_to_action} />
