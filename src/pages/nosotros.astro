@@ -10,7 +10,7 @@ import InformacionContacto from "@/components/contacto/InformacionContacto.astro
 import type { CollectionEntry } from "astro:content";
 import { getEntry } from "astro:content";
 
-const about = (await getEntry("about", "hero")) as CollectionEntry<"about">;
+const about = (await getEntry("about", "-index")) as CollectionEntry<"about">;
 const { title, meta_title, description, image } = about.data;
 
 const contactPageData = await getEntry("contact", "-index");
