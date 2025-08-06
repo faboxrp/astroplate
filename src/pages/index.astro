@@ -34,25 +34,54 @@ const { banner, features } = homepage.data as Homepage;
   <section class="section pt-14 bg-pattern-mosaico">
     <div class="container">
       <div class="row justify-center">
-        <div class="lg:col-7 md:col-9 mb-8 text-center">
-          <h1 set:html={markdownify(banner.title)} class="mb-4 text-h3 lg:text-h1 text-primary dark:text-darkmode-text-light" />
-          <p
-            set:html={markdownify(banner.content)}
-            class="mb-8 text-primary dark:text-darkmode-text-light bg-white/80 dark:bg-darkmode-body/80 rounded-lg px-6 py-4"
-          />
-          {
-            banner.button.enable && (
-              <a class="btn btn-primary mb-4" href={banner.button.link} target={banner.button.link.startsWith("http") ? "_blank" : "_self"} rel="noopener">
-                {banner.button.label}
-              </a>
-            )
-          }
-          <!-- </div> -->
-          <div class="bg-body dark:bg-darkmode-text-light backdrop-blur-sm rounded-xl p-6 md:p-10 shadow-lg">
+        <div class="lg:col-8 md:col-10 mb-8 text-center">
+          {/* Hero Badge */}
+          <div class="inline-block px-6 py-3 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full mb-6">
+            <span class="text-primary font-semibold text-sm uppercase tracking-wider">✨ OrthoPure - Especialistas en Sonrisas</span>
+          </div>
+
+          {/* Main Title */}
+          <h1 set:html={markdownify(banner.title)} class="mb-6 text-h3 lg:text-h1 text-primary leading-tight font-bold" />
+
+          {/* Enhanced Description */}
+          <div class="mb-8 max-w-3xl mx-auto">
+            <p
+              set:html={markdownify(banner.content)}
+              class="text-xl lg:text-2xl text-primary bg-white/90 backdrop-blur-sm rounded-2xl px-8 py-6 shadow-lg border border-primary/10 leading-relaxed"
+            />
+          </div>
+
+          {/* Enhanced Image Container with CTA Button */}
+          <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-6 md:p-10 shadow-2xl border border-primary/10 hover:shadow-3xl transition-all duration-500">
             {
               banner.image && (
-                <div class="col-12 mt-20">
-                  <ImageMod src={banner.image} height={360} width={889} alt="banner" format="webp" loading="eager" />
+                <div class="col-12">
+                  <div class="relative overflow-hidden rounded-2xl mb-8">
+                    <ImageMod
+                      src={banner.image}
+                      height={400}
+                      width={900}
+                      alt="OrthoPure - Transformamos sonrisas"
+                      format="webp"
+                      loading="eager"
+                      class="rounded-2xl"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent rounded-2xl" />
+                  </div>
+
+                  {/* CTA Button Inside Card */}
+                  {banner.button.enable && (
+                    <div class="text-center">
+                      <a
+                        class="btn btn-primary btn-lg px-10 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                        href={banner.button.link}
+                        target={banner.button.link.startsWith("http") ? "_blank" : "_self"}
+                        rel="noopener">
+                        {banner.button.label}
+                      </a>
+                      <p class="text-sm text-gray-600 mt-3 font-medium">📞 Consulta gratuita • 💯 Resultados garantizados</p>
+                    </div>
+                  )}
                 </div>
               )
             }
@@ -64,31 +93,206 @@ const { banner, features } = homepage.data as Homepage;
   <!-- /Banner -->
 
   <!-- Features -->
+  {/* Specialty Services - Enhanced Vertical Stack Layout */}
+  <section class="pb-12 md:pb-24 xl:pb-28 bg-pattern-mosaico">
+    <div class="container">
+      {/* Section Header */}
+      <div class="text-center mb-16">
+        <div class="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
+          <span class="text-primary font-medium text-sm uppercase tracking-wider">Especialidades</span>
+        </div>
+        <h2 class="mb-6 text-h2 text-primary leading-tight">
+          Nuestra Especialidad:<br />
+          <span class="text-secondary">Ortodoncia y Ortopedia Maxilar</span>
+        </h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
+          Soluciones <strong class="text-primary font-semibold">personalizadas</strong> adaptadas a cada etapa de la vida, con un enfoque <strong
+            class="text-primary font-semibold">humano y profesional</strong
+          >
+        </p>
+      </div>
+
+      {/* Specialty Items */}
+      <div class="space-y-16 max-w-4xl mx-auto">
+        {
+          features.slice(0, 3).map((feature, index: number) => (
+            <div class="group">
+              {/* Content Card with Image Inside */}
+              <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-lg hover:shadow-xl transition-all duration-500 border border-primary/10">
+                <div class="text-center">
+                  {/* Specialty Badge */}
+                  <div class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full mb-4">
+                    <div class="w-2 h-2 bg-primary rounded-full" />
+                    <span class="text-primary font-semibold text-sm uppercase tracking-wide">
+                      {index === 0 ? "Para Niños" : index === 1 ? "Para Adolescentes" : "Para Adultos"}
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <h3 set:html={markdownify(feature.title)} class="mb-6 text-3xl md:text-4xl font-bold text-primary leading-tight" />
+
+                  {/* Description */}
+                  <div class="max-w-3xl mx-auto mb-6">
+                    <p set:html={markdownify(feature.content)} class="text-xl md:text-2xl text-gray-700 leading-relaxed font-light" />
+                  </div>
+
+                  {/* Call to Action Text - Before Image */}
+                  <div class="p-4 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-xl border-l-4 border-primary mb-8">
+                    <p class="text-primary font-medium text-lg italic">
+                      {index === 0
+                        ? "💙 Corregir a tiempo es amar a tus hijos, agenda tu cita ahora!"
+                        : index === 1
+                          ? "✨ Una sonrisa perfecta para brillar con confianza"
+                          : "🌟 Nunca es tarde para transformar tu vida con una sonrisa radiante"}
+                    </p>
+                  </div>
+
+                  {/* Image Inside Card */}
+                  <div class="flex justify-center group-hover:scale-[1.02] transition-transform duration-500">
+                    <div class="relative overflow-hidden rounded-xl shadow-lg">
+                      <ImageMod src={feature.image} height={400} width={600} alt={feature.title} format="webp" class="rounded-xl" />
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent rounded-xl" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      {/* Bottom Call to Action */}
+      <div class="text-center mt-16">
+        <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-primary/20 max-w-2xl mx-auto">
+          <h4 class="text-2xl font-bold text-primary mb-4">¿Listo para transformar tu sonrisa?</h4>
+          <p class="text-gray-600 mb-6">Agenda tu consulta personalizada y descubre el tratamiento perfecto para ti</p>
+          <a href="/contacto" class="btn btn-primary btn-lg px-8 py-4 text-lg"> 🦷 Agenda tu Cita Gratuita </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Enhanced Remaining Features */}
   {
-    features.map((feature, index: number) => (
-      // <section class={`section-sm ${index % 2 === 0 && "bg-gradient"}`}>
+    features.slice(3).map((feature, index: number) => (
       <section class={`section-sm ${index % 2 !== 0 ? "bg-pattern-mosaico" : ""}`}>
         <div class="container">
-          <div class="row items-center justify-between">
-            <div class={`mb:md-0 mb-6 md:col-5 ${index % 2 !== 0 && "md:order-2"}`}>
-              <ImageMod src={feature.image} height={480} width={520} alt={feature.title} format="webp" />
-            </div>
-            <div class={`md:col-7 lg:col-6 ${index % 2 !== 0 && "md:order-1"}`}>
-              <h2 set:html={markdownify(feature.title)} class="mb-4" />
-              <p set:html={markdownify(feature.content)} class="mb-8 text-lg" />
-              <ul>
-                {feature.bulletpoints.map((bullet: string) => (
-                  <li class="relative mb-4 pl-6">
-                    <FaCheck className={"absolute left-0 top-1.5"} />
-                    <span set:html={markdownify(bullet)} />
-                  </li>
-                ))}
-              </ul>
-              {feature.button.enable && (
-                <a class="btn btn-primary mt-5" href={feature.button.link}>
-                  {feature.button.label}
-                </a>
-              )}
+          <div class="max-w-6xl mx-auto">
+            {/* Enhanced Feature Card */}
+            <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-2xl border border-primary/10 hover:shadow-3xl transition-all duration-500">
+              {/* Mobile Layout: Title -> Image -> Content */}
+              <div class="block md:hidden">
+                {/* Feature Badge */}
+                <div class="inline-block px-4 py-2 bg-gradient-to-r from-primary/15 to-secondary/15 rounded-full mb-6">
+                  <span class="text-primary font-semibold text-sm uppercase tracking-wide">{index === 0 ? "👩‍⚕️ Nuestro Equipo" : "🌟 Nuestros Resultados"}</span>
+                </div>
+
+                {/* Title */}
+                <h2 set:html={markdownify(feature.title)} class="mb-8 text-3xl font-bold text-primary leading-tight text-center" />
+
+                {/* Image for mobile - After Title */}
+                <div class="mb-8 flex justify-center">
+                  <div class="relative overflow-hidden rounded-2xl shadow-lg group max-w-md">
+                    <ImageMod
+                      src={feature.image}
+                      height={400}
+                      width={400}
+                      alt={feature.title}
+                      format="webp"
+                      class="rounded-2xl group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent rounded-2xl" />
+                  </div>
+                </div>
+
+                {/* Content - After Image */}
+                <p set:html={markdownify(feature.content)} class="mb-8 text-xl text-gray-700 leading-relaxed font-light text-center" />
+
+                {/* Enhanced Bullet Points */}
+                <div class="mb-8">
+                  <ul class="space-y-4">
+                    {feature.bulletpoints.map((bullet: string) => (
+                      <li class="relative pl-8 py-2">
+                        <div class="absolute left-0 top-3 w-2 h-2 bg-primary rounded-full" />
+                        <div class="bg-gradient-to-r from-primary/5 to-transparent p-4 rounded-xl border-l-2 border-primary/30">
+                          <span set:html={markdownify(bullet)} class="text-gray-700 font-medium" />
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Enhanced CTA */}
+                {feature.button.enable && (
+                  <div class="text-center">
+                    <a
+                      class="btn btn-primary btn-lg px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                      href={feature.button.link}>
+                      {feature.button.label}
+                    </a>
+                    {index === 0 && <p class="text-sm text-gray-600 mt-3 font-medium">💼 Experiencia profesional • 🎓 Formación especializada</p>}
+                    {index === 1 && <p class="text-sm text-gray-600 mt-3 font-medium">📸 Casos reales • ✨ Transformaciones increíbles</p>}
+                  </div>
+                )}
+              </div>
+
+              {/* Desktop Layout: Side by Side */}
+              <div class="hidden md:block">
+                <div class="row items-center justify-between">
+                  <div class={`md:col-7 lg:col-6 ${index % 2 !== 0 && "md:order-1"}`}>
+                    {/* Feature Badge */}
+                    <div class="inline-block px-4 py-2 bg-gradient-to-r from-primary/15 to-secondary/15 rounded-full mb-6">
+                      <span class="text-primary font-semibold text-sm uppercase tracking-wide">
+                        {index === 0 ? "👩‍⚕️ Nuestro Equipo" : "🌟 Nuestros Resultados"}
+                      </span>
+                    </div>
+
+                    <h2 set:html={markdownify(feature.title)} class="mb-6 text-3xl lg:text-4xl font-bold text-primary leading-tight" />
+                    <p set:html={markdownify(feature.content)} class="mb-8 text-xl text-gray-700 leading-relaxed font-light" />
+
+                    {/* Enhanced Bullet Points */}
+                    <div class="mb-8">
+                      <ul class="space-y-4">
+                        {feature.bulletpoints.map((bullet: string) => (
+                          <li class="relative pl-8 py-2">
+                            <div class="absolute left-0 top-3 w-2 h-2 bg-primary rounded-full" />
+                            <div class="bg-gradient-to-r from-primary/5 to-transparent p-4 rounded-xl border-l-2 border-primary/30">
+                              <span set:html={markdownify(bullet)} class="text-gray-700 font-medium" />
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Enhanced CTA */}
+                    {feature.button.enable && (
+                      <div class="text-center md:text-left">
+                        <a
+                          class="btn btn-primary btn-lg px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                          href={feature.button.link}>
+                          {feature.button.label}
+                        </a>
+                        {index === 0 && <p class="text-sm text-gray-600 mt-3 font-medium">💼 Experiencia profesional • 🎓 Formación especializada</p>}
+                        {index === 1 && <p class="text-sm text-gray-600 mt-3 font-medium">📸 Casos reales • ✨ Transformaciones increíbles</p>}
+                      </div>
+                    )}
+                  </div>
+
+                  <div class={`md:col-5 ${index % 2 !== 0 && "md:order-2"}`}>
+                    <div class="relative overflow-hidden rounded-2xl shadow-lg group">
+                      <ImageMod
+                        src={feature.image}
+                        height={500}
+                        width={550}
+                        alt={feature.title}
+                        format="webp"
+                        class="rounded-2xl group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div class="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent rounded-2xl" />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

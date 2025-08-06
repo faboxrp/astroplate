@@ -8,26 +8,49 @@ const { call_to_action } = Astro.props;
   call_to_action.data.enable && (
     <section class="mb-28">
       <div class="container">
-        <div class="rounded-xl bg-light px-4 py-16 dark:bg-darkmode-light xl:p-20">
-          <div class="row items-center justify-between">
-            <div class="mb-10 md:col-5 lg:col-4 md:order-2 md:mb-0">
-              <ImageMod
-                class="w-full"
-                src={call_to_action.data.image}
-                width={392}
-                height={390}
-                alt={call_to_action.data.image_alt || "Imagen de llamada a la acción"}
-                format="webp"
-              />
-            </div>
-            <div class="md:col-7 md:order-1">
-              <h2 set:html={markdownify(call_to_action.data.title)} class="mb-2" />
-              <p set:html={markdownify(call_to_action.data.description)} class="mb-6" />
-              {call_to_action.data.button.enable && (
-                <a class="btn btn-primary" href={call_to_action.data.button.link}>
-                  {call_to_action.data.button.label}
-                </a>
-              )}
+        <div class="max-w-6xl mx-auto">
+          {/* Enhanced CTA Card */}
+          <div class="bg-white/95 backdrop-blur-sm rounded-3xl p-8 xl:p-20 shadow-2xl border border-primary/10 hover:shadow-3xl transition-all duration-500">
+            <div class="row items-center justify-between">
+              <div class="mb-10 md:col-5 lg:col-4 md:order-2 md:mb-0">
+                <div class="relative overflow-hidden rounded-2xl shadow-lg group">
+                  <ImageMod
+                    class="w-full rounded-2xl group-hover:scale-105 transition-transform duration-500"
+                    src={call_to_action.data.image}
+                    width={400}
+                    height={400}
+                    alt={call_to_action.data.image_alt || "Imagen de llamada a la acción"}
+                    format="webp"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent rounded-2xl" />
+                </div>
+              </div>
+              <div class="md:col-7 md:order-1">
+                {/* CTA Badge */}
+                <div class="inline-block px-4 py-2 bg-gradient-to-r from-primary/15 to-secondary/15 rounded-full mb-6">
+                  <span class="text-primary font-semibold text-sm uppercase tracking-wide">🚀 Agenda tu cita Ahora!</span>
+                </div>
+
+                <h2 set:html={markdownify(call_to_action.data.title)} class="mb-6 text-3xl lg:text-4xl font-bold text-primary leading-tight" />
+                <p set:html={markdownify(call_to_action.data.description)} class="mb-8 text-xl text-gray-700 leading-relaxed font-light" />
+
+                {/* Enhanced CTA Content */}
+                <div class="mb-8 p-6 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-2xl border-l-4 border-primary">
+                  <p class="text-primary font-semibold text-lg">💫 No esperes más para transformar tu sonrisa</p>
+                  <p class="text-gray-600 mt-2">✓ Consulta gratuita • ✓ Plan personalizado • ✓ Resultados garantizados</p>
+                </div>
+
+                {call_to_action.data.button.enable && (
+                  <div class="text-center md:text-left">
+                    <a
+                      class="btn btn-primary btn-lg px-10 py-4 text-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                      href={call_to_action.data.button.link}>
+                      {call_to_action.data.button.label}
+                    </a>
+                    <p class="text-sm text-gray-600 mt-4 font-medium">📞 WhatsApp disponible • 🕐 Horarios flexibles</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
