@@ -12,9 +12,6 @@ import FormularioContacto from "@/layouts/components/contacto/FormularioContacto
 const contactPageData = await getEntry("contact", "-index");
 const { title, meta_title, description, image, intro_text } = contactPageData?.data || {};
 const { contact_form_action } = config.params;
-
-// Debug: Verificar qué datos estamos recibiendo
-console.log("Contact page data:", contactPageData?.data);
 ---
 
 <Base title={title} meta_title={meta_title} description={description} image={image}>
@@ -30,7 +27,7 @@ console.log("Contact page data:", contactPageData?.data);
           </div>
 
           {/* Formulario de contacto */}
-          <div>
+          <div class="flex justify-center">
             <FormularioContacto action={contact_form_action} />
           </div>
         </div>

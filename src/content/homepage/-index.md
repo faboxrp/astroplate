@@ -38,7 +38,7 @@ features:
       link: "/nosotros" # Enlaza a tu página "Nosotros"
   
   # Puedes añadir una tercera sección "feature" si lo deseas, por ejemplo:
-  - title: "Resultados Que Inspiran Confianza (Antes y Después)"
+  - title: "Resultados Que Inspiran Confianza"
     image: "/images/feature-antes-despues.png" # Placeholder: Collage de fotos de antes y después
     content: "Mira las transformaciones que hemos logrado. La ortodoncia no solo mejora la estética, sino también la función y la salud bucal. Estamos orgullosos de compartir los resultados de nuestros pacientes."
     bulletpoints:
