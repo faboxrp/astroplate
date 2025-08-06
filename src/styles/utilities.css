@@ -21,6 +21,8 @@
     url("/images/banner.svg");
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
   /* background-attachment: fixed; */
 }
 
@@ -30,6 +32,10 @@
     background-image:
       linear-gradient(rgba(59, 0, 86, 0.7), rgba(59, 0, 86, 0.7)),
       url("/images/banner.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
   }
 }
 

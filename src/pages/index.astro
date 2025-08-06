@@ -4,6 +4,7 @@ import Base from "@/layouts/Base.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import CallToAction from "@/partials/CallToAction.astro";
 import Testimonial from "@/partials/Testimonial.astro";
+import FAQ from "@/components/FAQ.astro";
 import type { Button, Feature } from "@/types";
 import type { CollectionEntry } from "astro:content";
 import { getEntry } from "astro:content";
@@ -96,6 +97,7 @@ const { banner, features } = homepage.data as Homepage;
   }
   <!-- /Features -->
 
+  <FAQ />
   <Testimonial class="bg-pattern-mosaico" testimonial={testimonial} />
   <CallToAction call_to_action={call_to_action} />
 </Base>

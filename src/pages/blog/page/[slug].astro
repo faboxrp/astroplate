@@ -44,27 +44,29 @@ export async function getStaticPaths() {
 ---
 
 <Base title={postIndex.data.title} meta_title={postIndex.data.meta_title} image={postIndex.data.image} description={postIndex.data.description}>
-  <PageHeader title={postIndex.data.title} />
-  <section class="section">
-    <div class="container">
-      <div class="row gx-5">
-        <!-- blog posts -->
-        <div class="lg:col-8">
-          <div class="row">
-            {
-              currentPosts.map((post) => (
-                <div class="mb-14 md:col-6">
-                  <BlogCard data={post} />
-                </div>
-              ))
-            }
+  <div class="bg-pattern-mosaico">
+    <PageHeader title={postIndex.data.title} />
+    <section class="section">
+      <div class="container">
+        <div class="row gx-5">
+          <!-- blog posts -->
+          <div class="lg:col-8">
+            <div class="row">
+              {
+                currentPosts.map((post) => (
+                  <div class="mb-14 md:col-6">
+                    <BlogCard data={post} />
+                  </div>
+                ))
+              }
+            </div>
+            <Pagination section={BLOG_FOLDER} currentPage={currentPage} totalPages={totalPages} />
           </div>
-          <Pagination section={BLOG_FOLDER} currentPage={currentPage} totalPages={totalPages} />
-        </div>
 
-        <!-- sidebar -->
-        <PostSidebar categories={categories} tags={tags} allCategories={allCategories} />
+          <!-- sidebar -->
+          <PostSidebar categories={categories} tags={tags} allCategories={allCategories} />
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </Base>
