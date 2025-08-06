@@ -11,9 +11,8 @@ En OrthoPure, ofrecemos soluciones de ortodoncia adaptadas a tus necesidades y e
 
 **Tipos de Ortodoncia que ofrecemos:**
 
-*   Brackets Metálicos Tradicionales
-*   Brackets Estéticos (cerámicos, zafiro)
-*   Ortodoncia Invisible 
-*   Ortodoncia Lingual 
+*   Brackets Metálicos Convencionales
+*   Brackets Metálicos Autoligados
+*   Brackets Estéticos
 
 Nuestro enfoque se basa en un diagnóstico preciso y un plan de tratamiento individualizado, asegurando resultados óptimos y duraderos.

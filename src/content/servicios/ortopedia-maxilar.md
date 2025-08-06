@@ -7,11 +7,10 @@ order: 2
 draft: false
 ---
 
-La ortopedia maxilar es fundamental durante la etapa de crecimiento de los niños. Este tratamiento interceptivo permite corregir desequilibrios en el desarrollo de los huesos maxilares, mejorar la función respiratoria y masticatoria, y a menudo simplificar o evitar tratamientos de ortodoncia más complejos en el futuro.
-
-  **¿Cuándo considerar la Ortopedia Maxilar?**
-  *   Si tu hijo tiene entre 6 y 10 años y presenta problemas de mordida.
-  *   Hábitos como succión del pulgar o respiración bucal.
-  *   Maxilares estrechos o falta de espacio para los dientes.
+  ## ¿Cuándo considerar la Ortopedia Maxilar?
+  Si tu hijo:
+  > - Tiene entre **6 y 12 años** y presenta problemas de mordida.
+  > - Respira por la boca, **ronca al dormir**.
+  > - Se succiona el pulgar o es evidente la **falta de espacio para los dientes**.
   
-  Una evaluación temprana con la Dra. Paola Mafla Rosero puede marcar una gran diferencia.
+  ### ¡Entonces necesita una **evaluación profesional urgente**!

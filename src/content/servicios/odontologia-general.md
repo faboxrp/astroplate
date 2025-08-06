@@ -1,19 +1,14 @@
 ---
-title: "Odontología General y Preventiva"
-short_description: "Cuidamos de tu salud bucal integral con revisiones, limpiezas profesionales, y tratamientos preventivos para mantener tu sonrisa sana."
+title: "Odontología Integral y Preventiva"
+short_description: "Cuidamos de tu salud bucal integral para recuperar tu mejor sonrisa."
 icon: "ScanFace" # Icono representativo de odontología general
 image: "/images/services/orthopure-odontologia-general.jpg" # Placeholder
 order: 3
 draft: false
 ---
 
-  Más allá de la ortodoncia, en OrthoPure ofrecemos una gama de servicios de odontología general para toda la familia. Creemos firmemente en la prevención como la mejor herramienta para una salud bucal duradera.
+En OrthoPure, además de la ortodoncia, brindamos servicios de odontología integral y preventiva para toda la familia. Nuestro objetivo es cuidar tu salud bucal en cada etapa, ayudándote a mantener y recuperar tu mejor sonrisa.
 
-  **Nuestros servicios generales incluyen:**
-  *   Revisiones Dentales Completas
-  *   Limpiezas Dentales Profesionales (Profilaxis)
-  *   Aplicación de Flúor y Sellantes
-  *   Obturaciones (empastes) estéticas
-  *   Asesoramiento en Higiene Oral
+¿Tienes alguna consulta o inquietud? ¡Déjanos ayudarte!
 
-  Te acompañamos en el cuidado diario de tu sonrisa.
+<!-- Botones para pregunta y agendar cita: -->

@@ -67,27 +67,44 @@ const aboutCollection = defineCollection({
 
 // contact collection schema
 const contactCollection = defineCollection({
-  loader: glob({ pattern: "-index.{md,mdx}", base: "src/content/contact" }), // Ajustado para que solo tome -index.md o -index.mdx
+  loader: glob({ pattern: "-index.{md,mdx}", base: "src/content/contact" }),
   schema: z.object({
     title: z.string(),
     meta_title: z.string().optional(),
     description: z.string().optional(),
     image: z.string().optional(),
     draft: z.boolean().optional(),
-    // Nuevos campos para la información de contacto detallada
-    intro_text: z.string().optional(), // Un pequeño texto de bienvenida en la página de contacto
+
+    // Información general de contacto
+    intro_text: z.string().optional(),
     phone_number: z.string().optional(),
-    phone_number_display: z.string().optional(), // Para mostrar con formato, ej: (02) 123-4567
-    whatsapp_number: z.string().optional(), // Número completo para el enlace wa.me, ej: 593991234567
-    whatsapp_text: z.string().optional(), // Texto para el botón/enlace de WhatsApp
+    phone_number_display: z.string().optional(),
+    whatsapp_number: z.string().optional(),
+    whatsapp_text: z.string().optional(),
     email_address: z.string().email().optional(),
+
+    // Múltiples ubicaciones (nuevo formato)
+    locations: z
+      .array(
+        z.object({
+          name: z.string(),
+          address: z.string(),
+          map_embed_code: z.string().optional(),
+          opening_hours: z.array(z.string()).optional(), // Horarios específicos por ubicación
+        }),
+      )
+      .optional(),
+
+    // Campos del formato anterior (compatibilidad hacia atrás)
     full_address: z.string().optional(),
-    opening_hours: z.array(z.string()).optional(), // Un array para listar horarios, ej: ["Lunes a Viernes: 9am - 6pm", "Sábados: 9am - 1pm"]
-    map_embed_code: z.string().optional(), // Para el iframe de Google Maps
+    map_embed_code: z.string().optional(),
+
+    // Otros campos
+    opening_hours: z.array(z.string()).optional(), // Horarios globales (compatibilidad)
     social_media: z
       .array(
         z.object({
-          platform: z.string(), // ej: "Facebook", "Instagram"
+          platform: z.string(),
           url: z.string().url(),
         }),
       )

@@ -1,9 +1,8 @@
 ---
 # Banner (Hero Section)
 banner:
-  title: "Transformando vidas a través de sonrisas"
-  # title: "OrthoPure: Creamos Sonrisas, Transformamos Vidas"
-  content: "Expertos en **ortodoncia y ortopedia maxilar.**  \n¡Agenda tu cita hoy mismo!"
+  title: "Transformamos sonrisas, creamos confianza."
+  content: "Expertos en **ortodoncia y ortopedia maxilar.**  \nOdontología integral  \n  \n¡Agenda tu cita hoy mismo!"
   image: "/images/banner-orthopure.png" # Placeholder: Sugerencia: Dra. Paola sonriendo, ambiente acogedor del consultorio, o una sonrisa radiante.
   image_darkmode: "/images/banner-orthopure-dark.png"
   button:
@@ -15,12 +14,11 @@ banner:
 features:
   - title: "Nuestra Especialidad: Ortodoncia y Ortopedia Maxilar"
     image: "/images/feature-ortodoncia-ortopedia.png" # Placeholder: Sugerencia: Joven sonriendo con brackets discretos, o una ilustración amigable del proceso.
-    content: "Ofrecemos soluciones de ortodoncia y ortopedia maxilar adaptadas a cada etapa de la vida, desde niños hasta adultos. Utilizamos las técnicas más actuales para garantizar resultados efectivos, funcionales y estéticos. ¡Tu sonrisa es nuestra prioridad!"
+    content: "Ofrecemos soluciones de ortodoncia y ortopedia maxilar adaptadas a cada etapa de la vida, desde niños hasta adultos, con las técnicas más actuales para garantizar resultados efectivos, funcionales y estéticos.  \n  \n¡Tu satisfacción es nuestra prioridad!"
     bulletpoints:
-      - "**Ortodoncia Infantil y Ortopedia:** Corrección y guía del desarrollo dental y maxilar en niños."
-      - "**Ortodoncia para Adolescentes:** Alineamos sonrisas para una etapa llena de confianza (brackets metálicos y estéticos)."
-      - "**Ortodoncia para Adultos:** Nunca es tarde para la sonrisa que siempre has deseado."
-      - "Diagnóstico preciso y planes de tratamiento individualizados."
+      - "**Ortopedia:** Cuidamos el crecimiento de la sonrisa de tus hijos con aparatos funcionales.  \nCorregir a tiempo es amar a tus hijos, agenda tu cita ahora!"
+      - "**Ortodoncia para Adolescentes:** Arreglamos tu sonrisa con estilo y a la moda, con nuestros brackes metalicos y esteticos."
+      - "**Ortodoncia para Adultos:** Nunca es tarde para la sonrisa que siempre has deseado, con nustros brackes esteticos y autoligados."
     button:
       enable: true
       label: "🦷 Conoce Nuestros Tratamientos"
@@ -28,7 +26,7 @@ features:
 
   - title: "Confianza y Cuidado Experto con la Dra. Paola Mafla Rosero"
     image: "/images/team/paola-mafla.jpg" # Placeholder: Sugerencia: Foto profesional y cercana de la Dra. Paola.
-    content: "En OrthoPure, la Dra. Paola Mafla Rosero brinda un trato profesional y cercano, respaldado por su **experiencia clínica** y **docencia universitaria en Odontología y Ortodoncia**, garantizando una atención informada y cuidadosa, con cada paciente."
+    content: "En OrthoPure, la Dra. Paola Mafla Rosero brinda un trato profesional y cercano, respaldado por su **experiencia clínica** y **docencia universitaria** de **prepgrado y postgrado** en **Odontología y Ortodoncia**, garantizando una atención informada y cuidadosa con cada paciente."
     bulletpoints:
       - "**Atención 100% Personalizada:** Cada tratamiento es único, diseñado específicamente para tus necesidades."
       - "**Experiencia y Docencia de Alto Nivel:** Confía en el conocimiento y habilidad de una experta reconocida."

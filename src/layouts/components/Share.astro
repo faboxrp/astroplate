@@ -1,61 +1,72 @@
 ---
 import config from "@/config/config.json";
-import {
-  IoLogoFacebook,
-  IoLogoLinkedin,
-  IoLogoPinterest,
-  IoLogoTwitter,
-} from "react-icons/io5";
+import { IoLogoFacebook, IoLogoLinkedin, IoLogoTwitter, IoLink, IoLogoWhatsapp } from "react-icons/io5";
 
 const { base_url }: { base_url: string } = config.site;
-const {
-  title,
-  description,
-  slug,
-  className,
-}: { title?: string; description?: string; slug?: string; className?: string } =
-  Astro.props;
+const { title, description, slug, className }: { title?: string; description?: string; slug?: string; className?: string } = Astro.props;
+
+// Construir la URL completa, manejando el caso donde slug sea undefined
+const getFullUrl = () => {
+  if (!slug || slug === "undefined") {
+    // Si no hay slug válido, usar solo la base URL
+    return base_url;
+  }
+
+  // Limpiar el slug de barras iniciales para evitar doble barra
+  const cleanSlug = slug.startsWith("/") ? slug.slice(1) : slug;
+  // Asegurar que base_url no termine en barra para evitar doble barra
+  const cleanBaseUrl = base_url.endsWith("/") ? base_url.slice(0, -1) : base_url;
+  return `${cleanBaseUrl}/${cleanSlug}`;
+};
+
+const fullUrl = getFullUrl();
+const shareTitle = title || "";
+const shareDescription = description || "";
 ---
 
 <ul class={`${className}`}>
   <li class="inline-block">
+    <a aria-label="whatsapp share button" href={`https://api.whatsapp.com/send?text=${title} - ${fullUrl}`} target="_blank" rel="noreferrer noopener">
+      <IoLogoWhatsapp />
+    </a>
+  </li>
+  <li class="inline-block">
     <a
       aria-label="facebook share button"
-      href={`https://facebook.com/sharer/sharer.php?u=${base_url}/${slug}`}
+      href={`https://facebook.com/sharer/sharer.php?u=${encodeURIComponent(fullUrl)}`}
       target="_blank"
-      rel="noreferrer noopener"
-    >
+      rel="noreferrer noopener">
       <IoLogoFacebook />
     </a>
   </li>
   <li class="inline-block">
     <a
       aria-label="twitter share button"
-      href={`https://twitter.com/intent/tweet/?text=${title}&amp;url=${base_url}/${slug}`}
+      href={`https://twitter.com/intent/tweet/?text=${encodeURIComponent(shareTitle)}&url=${encodeURIComponent(fullUrl)}`}
       target="_blank"
-      rel="noreferrer noopener"
-    >
+      rel="noreferrer noopener">
       <IoLogoTwitter />
     </a>
   </li>
   <li class="inline-block">
-    <a
-      aria-label="linkedin share button"
-      href={`https://www.linkedin.com/shareArticle?mini=true&url=${base_url}/${slug}&title=${title}&summary=${description}&source=${base_url}`}
-      target="_blank"
-      rel="noreferrer noopener"
-    >
-      <IoLogoLinkedin />
-    </a>
-  </li>
-  <li class="inline-block">
-    <a
-      aria-label="pinterest share button"
-      href={`https://pinterest.com/pin/create/button/?url=${base_url}/${slug}&media=&description=${description}`}
-      target="_blank"
-      rel="noreferrer noopener"
-    >
-      <IoLogoPinterest />
-    </a>
+    <button
+      aria-label="copiar enlace"
+      title="Copiar enlace"
+      onclick={`
+        navigator.clipboard.writeText('${fullUrl}').then(() => {
+          const originalIcon = this.innerHTML;
+          this.innerHTML = '<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 512 512"><path d="M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208 208-93.31 208-208S370.69 48 256 48zm108.25 138.29l-134.4 160a16 16 0 01-12 5.71h-.27a16 16 0 01-11.89-5.3l-57.6-64a16 16 0 1123.78-21.4l45.29 50.32 122.59-145.91a16 16 0 0124.5 20.58z"/></svg>';
+          this.style.color = '#10b981';
+          setTimeout(() => {
+            this.innerHTML = originalIcon;
+            this.style.color = '';
+          }, 2000);
+        }).catch(() => {
+          alert('No se pudo copiar el enlace');
+        });
+      `}
+      class="hover:text-primary transition-colors duration-200">
+      <IoLink />
+    </button>
   </li>
 </ul>

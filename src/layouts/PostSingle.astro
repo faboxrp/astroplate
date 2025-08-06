@@ -1,29 +1,30 @@
 ---
 import BlogCard from "@/components/BlogCard.astro";
 import Share from "@/components/Share.astro";
-// import Disqus from "@/helpers/Disqus"; // Comentado o eliminado si no se usa Disqus
 import { getSinglePage } from "@/lib/contentParser.astro";
 import dateFormat from "@/lib/utils/dateFormat";
 import similarItems from "@/lib/utils/similarItems";
 import { humanize, markdownify, slugify } from "@/lib/utils/textConverter";
 import { render } from "astro:content";
 import { FaRegClock, FaRegFolder, FaRegUserCircle } from "react-icons/fa";
-import ImageMod from "@/components/ImageMod.astro"; // Corregido: ImageMod es un componente, no está en layouts
+import ImageMod from "@/components/ImageMod.astro";
 
 const COLLECTION_FOLDER = "blog";
 const { post } = Astro.props;
 
 const posts = await getSinglePage(COLLECTION_FOLDER);
 const similarPosts = similarItems(post, posts);
-const { Content } = await render(post); // render() es para Astro < 3.0, para Astro 3.0+ es post.render()
-// Para Astro 3.0+
-// const { Content, headings } = await post.render();
+const { Content } = await render(post);
 
 const { title, description, author, categories, image, date, tags } = post.data;
 
+// Generar el slug del post con la ruta completa del blog
+const baseSlug = post.slug || post.id || slugify(title);
+const postSlug = `blog/${baseSlug}`;
+
 // Definir el nombre del autor principal para el blog
 const mainAuthorName = "Dra. Paola Mafla Rosero";
-const authorDisplayName = author === "Admin" || !author ? mainAuthorName : humanize(author); // Si el autor es "Admin" o no está definido, usa mainAuthorName
+const authorDisplayName = author === "Admin" || !author ? mainAuthorName : humanize(author);
 const authorSlug = author === "Admin" || !author ? slugify(mainAuthorName) : slugify(author);
 ---
 
@@ -40,10 +41,7 @@ const authorSlug = author === "Admin" || !author ? slugify(mainAuthorName) : slu
           )
         }
         <ul class="text-primary dark:text-darkmode-text-light flex justify-center">
-          {/* Mostrar el autor, categorías y fecha */}
-          {/* Si hay más de un autor, mostrar como enlace a la página de autores */}
           <li class="mr-4 inline-block">
-            {/* Enlace al autor. Si solo hay uno, podría no ser un enlace o enlazar a la página "Nosotros" */}
             <a href={`/autores/${authorSlug}`}>
               <FaRegUserCircle className={"mr-2 -mt-1 inline-block"} />
               {authorDisplayName}
@@ -61,7 +59,7 @@ const authorSlug = author === "Admin" || !author ? slugify(mainAuthorName) : slu
             }
           </li>
           {
-            date && ( // Mostrar fecha solo si está definida
+            date && (
               <li class="mr-4 inline-block">
                 <FaRegClock className={"mr-2 -mt-1 inline-block"} />
                 {dateFormat(date)}
@@ -70,39 +68,32 @@ const authorSlug = author === "Admin" || !author ? slugify(mainAuthorName) : slu
           }
         </ul>
         <div class="content mb-10 max-w-none sm:prose-lg mt-8">
-          {/* Aplicar clases de prose para el contenido del blog */}
           <Content />
         </div>
         <div class="row items-start justify-between">
           {
-            tags &&
-              tags.length > 0 &&
-              tags[0] !== "others" && ( // Mostrar tags solo si existen y no son solo "others"
-                <div class="mb-10 flex items-center lg:col-5 lg:mb-0">
-                  <h5 class="mr-3">Etiquetas:</h5>
-                  <ul>
-                    {tags.map((tag: string) => (
-                      <li class="inline-block">
-                        <a
-                          class="m-1 block rounded bg-light px-3 py-1 hover:bg-primary hover:text-white dark:bg-darkmode-light dark:hover:bg-darkmode-primary dark:hover:text-white"
-                          href={`/tags/${slugify(tag)}`}>
-                          {humanize(tag)}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )
+            tags && tags.length > 0 && tags[0] !== "others" && (
+              <div class="mb-10 flex items-center lg:col-5 lg:mb-0">
+                <h5 class="mr-3">Etiquetas:</h5>
+                <ul>
+                  {tags.map((tag: string) => (
+                    <li class="inline-block">
+                      <a
+                        class="m-1 block rounded bg-light px-3 py-1 hover:bg-primary hover:text-white dark:bg-darkmode-light dark:hover:bg-darkmode-primary dark:hover:text-white"
+                        href={`/tags/${slugify(tag)}`}>
+                        {humanize(tag)}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
           }
           <div class={`flex items-center ${tags && tags.length > 0 && tags[0] !== "others" ? "lg:col-4 lg:ml-auto" : "w-full justify-start"}`}>
-            {/* Ajustar si los tags no están */}
             <h5 class="mr-3">Compartir:</h5>
-            <Share className="social-icons" title={title} description={description} slug={post.slug} />
+            <Share className="social-icons" title={title} description={description} slug={postSlug} />
           </div>
         </div>
-
-        {/* Disqus - Considerar si es necesario para un blog de consultorio */}
-        {/* <Disqus className="mt-20" client:load /> */}
       </article>
     </div>
 
@@ -112,15 +103,11 @@ const authorSlug = author === "Admin" || !author ? slugify(mainAuthorName) : slu
         <div class="section pb-0">
           <h2 class="h3 mb-12 text-center">Artículos Relacionados</h2>
           <div class="row justify-center">
-            {similarPosts.map(
-              (
-                relatedPost // Cambiado 'post' a 'relatedPost' para evitar colisión de nombres
-              ) => (
-                <div class="lg:col-4 md:col-6 mb-14">
-                  <BlogCard data={relatedPost} />
-                </div>
-              )
-            )}
+            {similarPosts.map((relatedPost) => (
+              <div class="lg:col-4 md:col-6 mb-14">
+                <BlogCard data={relatedPost} />
+              </div>
+            ))}
           </div>
         </div>
       )

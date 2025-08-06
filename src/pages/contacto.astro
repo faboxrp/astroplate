@@ -12,6 +12,9 @@ import FormularioContacto from "@/layouts/components/contacto/FormularioContacto
 const contactPageData = await getEntry("contact", "-index");
 const { title, meta_title, description, image, intro_text } = contactPageData?.data || {};
 const { contact_form_action } = config.params;
+
+// Debug: Verificar qué datos estamos recibiendo
+console.log("Contact page data:", contactPageData?.data);
 ---
 
 <Base title={title} meta_title={meta_title} description={description} image={image}>
@@ -21,12 +24,12 @@ const { contact_form_action } = config.params;
       <div class="container">
         {intro_text && <div class="mb-12 text-center max-w-none sm:prose-lg" set:html={markdownify(intro_text)} />}
         <div class="row gy-5 lg:gy-0">
-          {/* Se añade un div contenedor que define el layout de columna */}
+          {/* Información de contacto */}
           <div class="lg:col-6">
-            {contactPageData && <InformacionContacto data={contactPageData.data} />}
+            {contactPageData?.data && <InformacionContacto data={contactPageData.data} />}
           </div>
 
-          {/* El formulario ya tenía un contenedor, así que está bien */}
+          {/* Formulario de contacto */}
           <FormularioContacto action={contact_form_action} />
         </div>
       </div>
