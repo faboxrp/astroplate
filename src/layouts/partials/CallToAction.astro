@@ -12,19 +12,6 @@ const { call_to_action } = Astro.props;
           {/* Enhanced CTA Card */}
           <div class="bg-white/95 backdrop-blur-sm rounded-3xl p-8 xl:p-20 shadow-2xl border border-primary/10 hover:shadow-3xl transition-all duration-500">
             <div class="row items-center justify-between">
-              <div class="mb-10 md:col-5 lg:col-4 md:order-2 md:mb-0">
-                <div class="relative overflow-hidden rounded-2xl shadow-lg group">
-                  <ImageMod
-                    class="w-full rounded-2xl group-hover:scale-105 transition-transform duration-500"
-                    src={call_to_action.data.image}
-                    width={400}
-                    height={400}
-                    alt={call_to_action.data.image_alt || "Imagen de llamada a la acción"}
-                    format="webp"
-                  />
-                  <div class="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent rounded-2xl" />
-                </div>
-              </div>
               <div class="md:col-7 md:order-1">
                 {/* CTA Badge */}
                 <div class="inline-block px-4 py-2 bg-gradient-to-r from-primary/15 to-secondary/15 rounded-full mb-6">
@@ -32,6 +19,22 @@ const { call_to_action } = Astro.props;
                 </div>
 
                 <h2 set:html={markdownify(call_to_action.data.title)} class="mb-6 text-3xl lg:text-4xl font-bold text-primary leading-tight" />
+                
+                {/* Imagen visible solo en móviles, después del título */}
+                <div class="block md:hidden mb-8">
+                  <div class="relative overflow-hidden rounded-2xl shadow-lg group">
+                    <ImageMod
+                      class="w-full rounded-2xl group-hover:scale-105 transition-transform duration-500"
+                      src={call_to_action.data.image}
+                      width={400}
+                      height={400}
+                      alt={call_to_action.data.image_alt || "Imagen de llamada a la acción"}
+                      format="webp"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent rounded-2xl" />
+                  </div>
+                </div>
+
                 <p set:html={markdownify(call_to_action.data.description)} class="mb-8 text-xl text-gray-700 leading-relaxed font-light" />
 
                 {/* Enhanced CTA Content */}
@@ -50,6 +53,21 @@ const { call_to_action } = Astro.props;
                     <p class="text-sm text-gray-600 mt-4 font-medium">📞 WhatsApp disponible • 🕐 Horarios flexibles</p>
                   </div>
                 )}
+              </div>
+              
+              {/* Imagen visible solo en desktop */}
+              <div class="hidden md:block mb-10 md:col-5 lg:col-4 md:order-2 md:mb-0">
+                <div class="relative overflow-hidden rounded-2xl shadow-lg group">
+                  <ImageMod
+                    class="w-full rounded-2xl group-hover:scale-105 transition-transform duration-500"
+                    src={call_to_action.data.image}
+                    width={400}
+                    height={400}
+                    alt={call_to_action.data.image_alt || "Imagen de llamada a la acción"}
+                    format="webp"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent rounded-2xl" />
+                </div>
               </div>
             </div>
           </div>
