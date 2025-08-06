@@ -31,23 +31,23 @@ const { banner, features } = homepage.data as Homepage;
 
 <Base>
   <!-- Banner -->
-  <section class="section pt-14 bg-pattern-mosaico">
+  <section class="pt-14 pb-4 md:pb-8 xl:pb-12 bg-pattern-mosaico-banner">
     <div class="container">
       <div class="row justify-center">
         <div class="lg:col-8 md:col-10 mb-8 text-center">
           {/* Hero Badge */}
           <div class="inline-block px-6 py-3 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full mb-6">
-            <span class="text-primary font-semibold text-sm uppercase tracking-wider">✨ OrthoPure - Especialistas en Sonrisas</span>
+            <span class="text-primary dark:text-darkmode-text font-semibold text-sm uppercase tracking-wider">✨ OrthoPure - Especialistas en Sonrisas</span>
           </div>
 
           {/* Main Title */}
-          <h1 set:html={markdownify(banner.title)} class="mb-6 text-h3 lg:text-h1 text-primary leading-tight font-bold" />
+          <h1 set:html={markdownify(banner.title)} class="mb-6 text-h3 lg:text-h1 text-primary leading-tight dark:text-darkmode-primary font-bold" />
 
           {/* Enhanced Description */}
           <div class="mb-8 max-w-3xl mx-auto">
             <p
               set:html={markdownify(banner.content)}
-              class="text-xl lg:text-2xl text-primary bg-white/90 backdrop-blur-sm rounded-2xl px-8 py-6 shadow-lg border border-primary/10 leading-relaxed"
+              class="text-xl lg:text-2xl text-primary dark:text-darkmode-secondary bg-white/90 backdrop-blur-sm rounded-2xl px-8 py-6 shadow-lg border border-primary/10 leading-relaxed"
             />
           </div>
 
@@ -64,7 +64,7 @@ const { banner, features } = homepage.data as Homepage;
                       alt="OrthoPure - Transformamos sonrisas"
                       format="webp"
                       loading="eager"
-                      class="rounded-2xl"
+                      class="rounded-2xl w-full h-auto"
                     />
                     <div class="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent rounded-2xl" />
                   </div>
@@ -94,18 +94,18 @@ const { banner, features } = homepage.data as Homepage;
 
   <!-- Features -->
   {/* Specialty Services - Enhanced Vertical Stack Layout */}
-  <section class="pb-12 md:pb-24 xl:pb-28 bg-pattern-mosaico">
+  <section class="section bg-pattern-mosaico">
     <div class="container">
       {/* Section Header */}
       <div class="text-center mb-16">
         <div class="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
-          <span class="text-primary font-medium text-sm uppercase tracking-wider">Especialidades</span>
+          <span class="text-primary dark:text-darkmode-primary font-medium text-sm uppercase tracking-wider">Especialidades</span>
         </div>
-        <h2 class="mb-6 text-h2 text-primary leading-tight">
+        <h2 class="mb-6 text-h2 text-primary leading-tight dark:text-darkmode-secondary font-bold">
           Nuestra Especialidad:<br />
-          <span class="text-secondary">Ortodoncia y Ortopedia Maxilar</span>
+          <span class="text-secondary dark:text-darkmode-primary">Ortodoncia y Ortopedia Maxilar</span>
         </h2>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
+        <p class="text-xl text-gray-600 dark:text-darkmode-text-light max-w-2xl mx-auto font-light leading-relaxed">
           Soluciones <strong class="text-primary font-semibold">personalizadas</strong> adaptadas a cada etapa de la vida, con un enfoque <strong
             class="text-primary font-semibold">humano y profesional</strong
           >

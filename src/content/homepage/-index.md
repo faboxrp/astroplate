@@ -22,7 +22,7 @@ features:
       link: ""
 
   - title: "Ortodoncia para Adolescentes"
-    image: "/images/services/orthopure-ortodoncia.jpg"
+    image: "/images/services/orthopure-ortodoncia-adolescentes.jpeg"
     content: "Arreglamos tu sonrisa con estilo y a la moda, con nuestros brackets metálicos y estéticos."
     bulletpoints: []
     button:
@@ -59,7 +59,7 @@ features:
     bulletpoints:
       - "Casos reales de ortodoncia y ortopedia."
       - "Impacto positivo en la sonrisa y autoestima."
-      - "Testimonios de pacientes satisfechos (ver más abajo)."
+      - "Testimonios de pacientes satisfechos."
     button:
       enable: true
       label: "Ver Galería de Casos" # Podría enlazar a una sección en "Servicios" o una página "Casos"

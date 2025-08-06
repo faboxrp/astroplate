@@ -39,6 +39,27 @@
   }
 }
 
+/* Variante para banner sin altura fija */
+@utility bg-pattern-mosaico-banner {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+    url("/images/banner.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@layer utilities {
+  .dark .bg-pattern-mosaico-banner {
+    background-image:
+      linear-gradient(rgba(59, 0, 86, 0.7), rgba(59, 0, 86, 0.7)),
+      url("/images/banner.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
 @utility bg-pattern-mosaico-degradado {
   /* Hacemos que el degradado vaya de transparente a tu color de fondo ('body')
        El degradado comenzará a notarse al 20% y será sólido al 60% */
