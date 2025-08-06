@@ -7,23 +7,29 @@ import { getEntry } from "astro:content";
 import { markdownify } from "@/lib/utils/textConverter";
 import InformacionContacto from "@/layouts/components/contacto/InformacionContacto.astro";
 import FormularioContacto from "@/layouts/components/contacto/FormularioContacto.astro";
+import CallToAction from "@/partials/CallToAction.astro";
 
 // Lógica para obtener datos
 const contactPageData = await getEntry("contact", "-index");
-const { title, meta_title, description, image, intro_text } = contactPageData?.data || {};
+
+if (!contactPageData) {
+  return Astro.redirect('/404');
+}
+
+const call_to_action = await getEntry("ctaSection", "call-to-action");
+const { title, meta_title, description, image, intro_text } = contactPageData.data;
 const { contact_form_action } = config.params;
 ---
 
 <Base title={title} meta_title={meta_title} description={description} image={image}>
   <div class="bg-pattern-mosaico">
-    <PageHeader title={title} />
+    <PageHeader title={title} intro={intro_text} />
     <section class="section-sm">
       <div class="container">
-        {intro_text && <div class="mb-12 text-center max-w-none sm:prose-lg" set:html={markdownify(intro_text)} />}
         <div class="space-y-12">
           {/* Información de contacto */}
           <div>
-            {contactPageData?.data && <InformacionContacto data={contactPageData.data} />}
+            <InformacionContacto data={contactPageData.data} />
           </div>
 
           {/* Formulario de contacto */}
@@ -33,5 +39,6 @@ const { contact_form_action } = config.params;
         </div>
       </div>
     </section>
+    <CallToAction call_to_action={call_to_action} />
   </div>
 </Base>

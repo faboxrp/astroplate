@@ -1,68 +1,57 @@
 ---
-// src/pages/servicios.astro
 import Base from "@/layouts/Base.astro";
-import PageHeader from "@/partials/PageHeader.astro"; // Asumimos que usa bg-primary por defecto
 import ServiceItem from "@/layouts/components/services/ServiceItem.astro";
 import CallToAction from "@/partials/CallToAction.astro";
-
+import PageHeader from "@/partials/PageHeader.astro";
 import { getCollection, getEntry, type CollectionEntry } from "astro:content";
 import { sortByOrder } from "@/lib/utils/sortFunctions";
-import { markdownify } from "@/lib/utils/textConverter";
 
+// Collection names
 type ServicesIndexCollectionName = "servicesIndex";
 type ServiceItemsCollectionName = "servicios";
 type CtaSectionCollectionName = "ctaSection";
 
+// Fetching data
 const servicesPageInfo = (await getEntry("servicesIndex", "-index")) as CollectionEntry<ServicesIndexCollectionName>;
 const { title, meta_title, description, image, intro_text } = servicesPageInfo.data;
 
 const allServicesUnfiltered = await getCollection("servicios");
 const allServices = allServicesUnfiltered.filter((entry: CollectionEntry<ServiceItemsCollectionName>) => entry.data.draft !== true);
-
 const sortedServices = sortByOrder(allServices);
 
 const call_to_action = (await getEntry("ctaSection", "call-to-action")) as CollectionEntry<CtaSectionCollectionName>;
 ---
 
 <Base title={title} meta_title={meta_title} description={description} image={image}>
-  <div class="bg-pattern-mosaico">
-    {/* Aplicar clase de fondo dinámico */}
-    <PageHeader title={title} />
+  <div class="bg-pattern-mosaico-banner pb-12">
+    <PageHeader title={title} intro={intro_text} />
 
-    {
-      intro_text && (
-        <section class={"section-sm"}>
-          {" "}
-          {/* Aplicar clase de fondo dinámico */}
-          <div class="container text-center md:col-10 lg:col-8 mx-auto">
-            {/* Aplicar clase de color de texto dinámico y estilos de prose */}
-            <div class="max-w-none text-lg" set:html={markdownify(intro_text)} />
+    <div class="container -mt-20">
+      <div class="row justify-center">
+        <div class="lg:col-10">
+          <div class="rounded-2xl bg-white/80 backdrop-blur-sm shadow-lg p-6 md:p-10 border border-primary/10">
+            {
+              sortedServices.length > 0 ? (
+                <div class="space-y-12">
+                  {sortedServices.map((service, index) => (
+                    <ServiceItem service={service} index={index} />
+                  ))}
+                </div>
+              ) : (
+                <div class="text-center py-12">
+                  <p class="text-lg text-gray-600">
+                    Próximamente encontrarás aquí información detallada sobre nuestros servicios.
+                    <br />
+                    ¡Gracias por tu paciencia!
+                  </p>
+                </div>
+              )
+            }
           </div>
-        </section>
-      )
-    }
-
-    {
-      sortedServices.length > 0 ? (
-        sortedServices.map((service, index) => (
-          <ServiceItem service={service} index={index} /> // ServiceItem maneja su alternancia de bg-gradient
-        ))
-      ) : (
-        <section class="section-sm bg-body">
-          {" "}
-          {/* Fondo del body por defecto */}
-          <div class="container text-center">
-            <p class="text-lg text-text">
-              {" "}
-              {/* Color de texto por defecto */}
-              Próximamente encontrarás aquí información detallada sobre nuestros servicios. ¡Gracias por tu paciencia!
-            </p>
-          </div>
-        </section>
-      )
-    }
-
-    {/* CallToAction usa sus propios estilos (bg-light por defecto) */}
-    <CallToAction call_to_action={call_to_action} />
+        </div>
+      </div>
+    </div>
   </div>
+
+  <CallToAction class="mt-20" call_to_action={call_to_action} />
 </Base>

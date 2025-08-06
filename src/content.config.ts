@@ -250,7 +250,6 @@ const serviceItemsCollection = defineCollection({
     short_description: z.string(),
     icon: z.string().optional(),
     image: z.string().optional(),
-    // content: z.string(),
     order: z.number().optional(),
     draft: z.boolean().optional().default(false),
   }),

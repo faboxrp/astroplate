@@ -1,15 +1,25 @@
 ---
-import Breadcrumbs from "@/components/Breadcrumbs.astro";
-import { humanize } from "@/lib/utils/textConverter";
+import { markdownify } from "@/lib/utils/textConverter";
 
-const { title = "" }: { title?: string } = Astro.props;
+export interface Props {
+  title: string;
+  intro?: string;
+}
+
+const { title, intro } = Astro.props;
 ---
 
-<section>
-  <div class="container text-center">
-    <div class="rounded-2xl bg-gradient-to-b from-body to-light px-8 py-14 dark:from-darkmode-body dark:to-darkmode-light">
-      <h1 class="text-primary dark:text-darkmode-text-light" set:text={humanize(title)} />
-      <Breadcrumbs className="mt-6" />
+<section class="page-header pt-16 pb-28">
+  <div class="container">
+    <div class="row justify-center">
+      <div class="lg:col-8 text-center">
+        <h1 class="text-h1 font-bold text-primary dark:text-darkmode-primary leading-tight" set:html={markdownify(title)} />
+        {intro && (
+          <div class="mt-6">
+            <p class="text-xl text-primary dark:text-darkmode-light leading-relaxed" set:html={markdownify(intro)} />
+          </div>
+        )}
+      </div>
     </div>
   </div>
 </section>

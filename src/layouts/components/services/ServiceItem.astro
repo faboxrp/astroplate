@@ -1,5 +1,4 @@
 ---
-// src/layouts/components/services/ServiceItem.astro
 import ImageMod from "@/components/ImageMod.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import type { CollectionEntry } from "astro:content";
@@ -13,9 +12,7 @@ interface Props {
 }
 
 const { service, index } = Astro.props;
-const { title, short_description, icon, image } = service.data; // 'content' ya no se obtiene de service.data
-
-// Importar el componente Content del entry
+const { title, icon, image } = service.data;
 const { Content } = await render(service);
 
 const getIcon = (name?: string): LucideIcon | null => {
@@ -26,26 +23,45 @@ const IconComponent = getIcon(icon);
 const isEven = index % 2 === 0;
 ---
 
-<section class={`section-sm service-item ${isEven ? "bg-pattern-mosaico" : ""}`}>
-  <div class="container">
-    <div class="row items-center justify-between">
-      <div class:list={["mb:md-0 mb-6 md:col-5", { "md:order-2": !isEven }]}>
-        {image && <ImageMod src={image} height={400} width={500} alt={title} class="w-full rounded-lg shadow-lg object-cover" format="webp" />}
-      </div>
-      <div class:list={["md:col-7 lg:col-6", { "md:order-1": !isEven }]}>
-        <div class="flex items-center mb-4">
-          {IconComponent && <IconComponent className="h-10 w-10 mr-3 flex-shrink-0 text-primary dark:text-darkmode-primary" />}
-          <h2 set:html={markdownify(title)} class="h3" />
+<div class="service-item group transition-all duration-300 hover:shadow-2xl rounded-2xl my-4 mx-2">
+  <div class="row items-center">
+    <!-- Service Image -->
+    <div class:list={["md:col-6", { "md:order-2": !isEven }]}>
+      <div class="relative p-4 rounded-2xl overflow-hidden">
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 dark:from-primary/20 dark:to-secondary/20 rounded-2xl transform group-hover:scale-105 transition-transform duration-500">
         </div>
-        <p set:html={markdownify(short_description)} class="mb-6 text-lg leading-relaxed" />
+        {
+          image && (
+            <ImageMod
+              src={image}
+              height={350}
+              width={550}
+              alt={title}
+              class="w-full h-full object-cover rounded-lg shadow-lg relative transform transition-transform duration-500 group-hover:scale-105"
+              format="webp"
+            />
+          )
+        }
+      </div>
+    </div>
 
-        {/* RENDERIZAR EL CONTENIDO DEL CUERPO DEL MARKDOWN */}
-        <div class="prose dark:prose-invert max-w-none text-primary dark:text-darkmode-primary">
+    <!-- Service Content -->
+    <div class:list={["md:col-6", { "md:order-1": !isEven }]}>
+      <div class="p-6 md:p-8">
+        <div class="flex items-center mb-4">
+          {IconComponent && <IconComponent className="h-10 w-10 mr-4 flex-shrink-0 text-primary dark:text-darkmode-primary" />}
+          <h3 set:html={markdownify(title)} class="text-2xl md:text-3xl font-bold text-primary dark:text-darkmode-primary" />
+        </div>
+
+        <div class="prose dark:prose-invert max-w-none text-gray-700 dark:text-darkmode-light text-lg leading-relaxed">
           <Content />
         </div>
 
-        <a href={`/contacto?servicio=${encodeURIComponent(title)}`} class="btn btn-primary mt-8"> Solicitar Información </a>
+        <a href={`/contacto?servicio=${encodeURIComponent(title)}`} class="btn btn-primary mt-6 group-hover:scale-105 transition-transform duration-300">
+          Agendar Cita
+        </a>
       </div>
     </div>
   </div>
-</section>
+</div>

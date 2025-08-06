@@ -2,7 +2,7 @@
 title: "Nuestra Galería de Sonrisas"
 meta_title: "Galería de Fotos - OrthoPure"
 description: "Explora las transformaciones y sonrisas creadas en OrthoPure."
-header_image: "/images/gallery/instalacion1.jpg" # Opcional
+header_image: "/images/gallery/instalacion1.jpg"
 draft: false
 gallery_items:
   - image_url: "/images/gallery/instalacion1.jpg"
@@ -17,7 +17,6 @@ gallery_items:
     alt_text: "Dientes después del tratamiento"
     caption: "Después del tratamiento de ortodoncia"
     category: "Ortodoncia"
-  
 ---
 
 ## Bienvenidos a Nuestra Galería
