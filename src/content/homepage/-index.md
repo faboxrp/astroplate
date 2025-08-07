@@ -61,7 +61,7 @@ features:
       - "Impacto positivo en la sonrisa y autoestima."
       - "Testimonios de pacientes satisfechos."
     button:
-      enable: true
+      enable: false  # TEMPORALMENTE DESACTIVADO - Ver TEMPORARY_CHANGES.md
       label: "Ver Galería de Casos" # Podría enlazar a una sección en "Servicios" o una página "Casos"
       link: "/galeria" # Ejemplo de enlace
 

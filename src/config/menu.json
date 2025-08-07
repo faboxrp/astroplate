@@ -36,8 +36,10 @@
       ]
     },
     {
+      "_comment": "TEMPORALMENTE COMENTADO - Galería (Ver TEMPORARY_CHANGES.md)",
       "name": "Galería",
-      "url": "/galeria"
+      "url": "/galeria",
+      "_disabled": true
     },
     {
       "name": "Contacto",

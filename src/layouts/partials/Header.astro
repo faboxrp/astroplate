@@ -15,9 +15,12 @@ export interface NavigationLink {
   url: string;
   hasChildren?: boolean;
   children?: ChildNavigationLink[];
+  _disabled?: boolean;
 }
 
 const { main }: { main: NavigationLink[] } = menu;
+// Filter out disabled menu items
+const activeMain = main.filter(item => !item._disabled);
 const { navigation_button, settings } = config;
 const { pathname } = Astro.url;
 ---
@@ -51,7 +54,7 @@ const { pathname } = Astro.url;
       class="navbar-nav order-3 hidden w-full pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8"
     >
       {
-        main.map((menu) => (
+        activeMain.map((menu) => (
           <>
             {menu.hasChildren ? (
               <li class="nav-item nav-dropdown group relative">
