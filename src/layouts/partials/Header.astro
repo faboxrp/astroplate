@@ -58,38 +58,53 @@ const { pathname } = Astro.url;
           <>
             {menu.hasChildren ? (
               <li class="nav-item nav-dropdown group relative">
-                <span
-                  class={`nav-link inline-flex items-center ${
-                    menu.children?.map(({ url }) => url).includes(pathname) ||
-                    menu.children
-                      ?.map(({ url }) => `${url}/`)
-                      .includes(pathname)
-                      ? "active"
-                      : ""
+                <!-- Desktop: Show dropdown with arrow -->
+                <div class="hidden lg:block">
+                  <span
+                    class={`nav-link inline-flex items-center ${
+                      menu.children?.map(({ url }) => url).includes(pathname) ||
+                      menu.children
+                        ?.map(({ url }) => `${url}/`)
+                        .includes(pathname)
+                        ? "active"
+                        : ""
+                    }`}
+                  >
+                    {menu.name}
+                    <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                  </span>
+                  <ul class="nav-dropdown-list hidden group-hover:block lg:invisible lg:absolute lg:block lg:opacity-0 lg:group-hover:visible lg:group-hover:opacity-100">
+                    {menu.children?.map((child) => (
+                      <li class="nav-dropdown-item">
+                        <a
+                          href={child.url}
+                          aria-label={child.name}
+                          class={`nav-dropdown-link block ${
+                            (pathname === `${child.url}/` ||
+                              pathname === child.url) &&
+                            "active"
+                          }`}
+                        >
+                          {child.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <!-- Mobile: Show as direct link without arrow -->
+                <a
+                  href={menu.url}
+                  class={`nav-link block lg:hidden ${
+                    (pathname === `${menu.url}/` || pathname === menu.url) &&
+                    "active"
                   }`}
+                  data-mobile-scroll-target={menu.name.toLowerCase() === 'blog' ? 'blog' : null}
                 >
                   {menu.name}
-                  <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                  </svg>
-                </span>
-                <ul class="nav-dropdown-list hidden group-hover:block lg:invisible lg:absolute lg:block lg:opacity-0 lg:group-hover:visible lg:group-hover:opacity-100">
-                  {menu.children?.map((child) => (
-                    <li class="nav-dropdown-item">
-                      <a
-                        href={child.url}
-                        aria-label={child.name}
-                        class={`nav-dropdown-link block ${
-                          (pathname === `${child.url}/` ||
-                            pathname === child.url) &&
-                          "active"
-                        }`}
-                      >
-                        {child.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+                </a>
               </li>
             ) : (
               <li class="nav-item">
@@ -99,6 +114,10 @@ const { pathname } = Astro.url;
                     (pathname === `${menu.url}/` || pathname === menu.url) &&
                     "active"
                   }`}
+                  data-mobile-scroll-target={menu.name.toLowerCase() === 'nosotros' ? 'nosotros' : 
+                    menu.name.toLowerCase() === 'servicios' ? 'servicios' :
+                    menu.name.toLowerCase() === 'contacto' ? 'contacto' :
+                    menu.name.toLowerCase() === 'blog' ? 'blog' : null}
                 >
                   {menu.name}
                 </a>
@@ -146,3 +165,88 @@ const { pathname } = Astro.url;
     </div>
   </nav>
 </header>
+
+<script>
+  // Smart Mobile Navigation with Smooth Scrolling
+  document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('[data-mobile-scroll-target]');
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    
+    function isMobile() {
+      return window.innerWidth < 768; // md breakpoint
+    }
+    
+    function isHomepage() {
+      return window.location.pathname === '/' || window.location.pathname === '/index';
+    }
+    
+    function closeMenu() {
+      if (navToggle) {
+        navToggle.checked = false;
+      }
+    }
+    
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        const target = this.getAttribute('data-mobile-scroll-target');
+        
+        // Only use smooth scrolling on mobile and homepage
+        if (isMobile() && isHomepage() && target) {
+          e.preventDefault();
+          
+          const targetSection = document.getElementById(target);
+          if (targetSection) {
+            // Close mobile menu first
+            closeMenu();
+            
+            // Small delay to allow menu to close
+            setTimeout(() => {
+              targetSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+              
+              // Update URL hash for better UX
+              history.pushState(null, null, '#' + target);
+            }, 100);
+          }
+        }
+        // On desktop or other pages, use normal navigation (default behavior)
+      });
+    });
+    
+    // Handle window resize to switch between mobile/desktop behavior
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        // Force close mobile menu on resize to desktop
+        if (!isMobile() && navToggle && navToggle.checked) {
+          closeMenu();
+        }
+      }, 150);
+    });
+    
+    // Handle hash-based navigation on page load (for direct links)
+    if (isHomepage() && window.location.hash && isMobile()) {
+      const targetId = window.location.hash.substring(1);
+      const targetSection = document.getElementById(targetId);
+      if (targetSection) {
+        setTimeout(() => {
+          targetSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }, 500); // Delay to allow page to fully load
+      }
+    }
+  });
+  
+  // Re-run on page navigation (for Astro page transitions)
+  document.addEventListener('astro:page-load', function() {
+    // Re-initialize navigation for new page
+    const event = new Event('DOMContentLoaded');
+    document.dispatchEvent(event);
+  });
+</script>

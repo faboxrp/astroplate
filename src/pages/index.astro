@@ -8,8 +8,18 @@ import Testimonial from "@/partials/Testimonial.astro";
 import FAQ from "@/components/FAQ.astro";
 import type { Button, Feature } from "@/types";
 import type { CollectionEntry } from "astro:content";
-import { getEntry } from "astro:content";
+import { getEntry, getCollection } from "astro:content";
 import { FaCheck } from "react-icons/fa";
+
+// Import additional components for full single-page experience
+import Story from "@/layouts/components/about/Story.astro";
+import Valores from "@/layouts/components/about/Valores.astro";
+import InformacionContacto from "@/layouts/components/contacto/InformacionContacto.astro";
+import FormularioContacto from "@/layouts/components/contacto/FormularioContacto.astro";
+import ServiceItem from "@/layouts/components/services/ServiceItem.astro";
+import BlogCard from "@/layouts/components/BlogCard.astro";
+import { sortByOrder } from "@/lib/utils/sortFunctions";
+import config from "@/config/config.json";
 
 interface Homepage {
   banner: {
@@ -36,7 +46,21 @@ const testimonial = (await getEntry("testimonialSection", "testimonial")) as Col
 
 const call_to_action = (await getEntry("ctaSection", "call-to-action")) as CollectionEntry<"ctaSection">;
 
+// Additional content for single-page experience
+const about = (await getEntry("about", "-index")) as CollectionEntry<"about">;
+const contactPageData = await getEntry("contact", "-index");
+const servicesPageInfo = (await getEntry("servicesIndex", "-index"));
+const allServicesUnfiltered = await getCollection("servicios");
+const allServices = allServicesUnfiltered.filter((entry) => entry.data.draft !== true);
+const sortedServices = sortByOrder(allServices);
+
+// Blog posts for mobile section
+const allBlogPosts = await getCollection("blog");
+const publishedPosts = allBlogPosts.filter((post) => !post.data.draft);
+const sortedPosts = publishedPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()).slice(0, 6);
+
 const { banner, features, team } = homepage.data as Homepage;
+const { contact_form_action } = config.params;
 
 // Get active doctor for team slider
 const activeDoctor = team?.doctors?.find(doctor => doctor.active) || team?.doctors?.[0];
@@ -237,7 +261,7 @@ const activeDoctor = team?.doctors?.find(doctor => doctor.active) || team?.docto
                 </div>
 
                 {/* Content - After Image */}
-                <p set:html={markdownify(feature.content)} class="mb-8 text-xl text-gray-700 leading-relaxed font-light text-center" />
+                <p set:html={markdownify(feature.content)} class="mb-8 text-xl text-gray-700 dark:text-darkmode-secondary leading-relaxed font-light text-center" />
 
                 {/* Enhanced Bullet Points */}
                 <div class="mb-8">
@@ -246,7 +270,7 @@ const activeDoctor = team?.doctors?.find(doctor => doctor.active) || team?.docto
                       <li class="relative pl-8 py-2">
                         <div class="absolute left-0 top-3 w-2 h-2 bg-primary rounded-full" />
                         <div class="bg-gradient-to-r from-primary/5 to-transparent p-4 rounded-xl border-l-2 border-primary/30">
-                          <span set:html={markdownify(bullet)} class="text-gray-700 font-medium" />
+                          <span set:html={markdownify(bullet)} class=" dark:text-darkmode-light font-medium" />
                         </div>
                       </li>
                     ))}
@@ -278,8 +302,8 @@ const activeDoctor = team?.doctors?.find(doctor => doctor.active) || team?.docto
                       </span>
                     </div>
 
-                    <h2 set:html={markdownify(feature.title)} class="mb-6 text-3xl lg:text-4xl font-bold text-primary leading-tight" />
-                    <p set:html={markdownify(feature.content)} class="mb-8 text-xl text-gray-700 leading-relaxed font-light" />
+                    <h2 set:html={markdownify(feature.title)} class="mb-6 text-3xl lg:text-4xl font-bold text-primary dark:text-darkmode-primary leading-tight" />
+                    <p set:html={markdownify(feature.content)} class="mb-8 text-xl text-gray-700 dark:text-gray-300 leading-relaxed font-light" />
 
                     {/* Enhanced Bullet Points */}
                     <div class="mb-8">
@@ -288,7 +312,7 @@ const activeDoctor = team?.doctors?.find(doctor => doctor.active) || team?.docto
                           <li class="relative pl-8 py-2">
                             <div class="absolute left-0 top-3 w-2 h-2 bg-primary rounded-full" />
                             <div class="bg-gradient-to-r from-primary/5 to-transparent p-4 rounded-xl border-l-2 border-primary/30">
-                              <span set:html={markdownify(bullet)} class="text-gray-700 font-medium" />
+                              <span set:html={markdownify(bullet)} class="text-gray-700 dark:text-gray-300 font-medium" />
                             </div>
                           </li>
                         ))}
@@ -349,6 +373,85 @@ const activeDoctor = team?.doctors?.find(doctor => doctor.active) || team?.docto
   <!-- /Features -->
 
   <FAQ />
+  
+  <!-- Mobile Single-Page Sections (Hidden on Desktop) -->
+  <div class="block md:hidden">
+    <!-- About/Nosotros Section -->
+    <section id="nosotros" class="section bg-gradient-to-br from-primary/5 to-secondary/5">
+      <div class="container">
+        <div class="text-center mb-12">
+          <h2 class="h2 mb-4 font-bold text-primary dark:text-darkmode-primary">Nosotros</h2>
+          <p class="text-lg text-gray-600 dark:text-darkmode-light">Conoce nuestro equipo y valores</p>
+        </div>
+        <Story className="fade-up opacity-100 motion-safe:opacity-0" />
+        <Valores />
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="section bg-pattern-mosaico-banner">
+      <div class="container">
+        <div class="text-center mb-12">
+          <h2 class="h2 mb-4 font-bold text-primary dark:text-darkmode-primary">Servicios</h2>
+          <p class="text-lg dark:text-darkmode-primary">Descubre nuestros tratamientos especializados</p>
+        </div>
+        <div class="rounded-2xl bg-white/80 backdrop-blur-sm shadow-lg p-6 md:p-10 border border-primary/10">
+          {
+            sortedServices.length > 0 ? (
+              sortedServices.map((service, index) => (
+                <ServiceItem service={service} index={index} />
+              ))
+            ) : (
+              <div class="text-center py-12">
+                <p class="text-lg dark:text-darkmode-primary">
+                  Próximamente encontrarás aquí información detallada sobre nuestros servicios.
+                  <br />
+                  ¡Gracias por tu paciencia!
+                </p>
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="section bg-pattern-mosaico">
+      <div class="container">
+        <div class="text-center mb-12">
+          <h2 class="h2 mb-4 font-bold text-primary dark:text-darkmode-primary">Blog OrthoPure: Consejos y Cuidados para tu Sonrisa</h2>
+        </div>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {
+            sortedPosts.map((post) => (
+              <BlogCard data={post} />
+            ))
+          }
+        </div>
+        <div class="text-center mt-8">
+          <a href="/blog" class="btn btn-outline-primary">
+            Ver todos los artículos
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="section bg-gradient-to-br from-primary/5 to-secondary/5">
+      <div class="container">
+        <div class="text-center mb-12">
+          <h2 class="h2 mb-4 font-bold text-primary dark:text-darkmode-primary">Contáctanos</h2>
+        </div>
+        <div class="space-y-12">
+          {contactPageData && <InformacionContacto data={contactPageData.data} />}
+          <div class="flex justify-center">
+            <FormularioContacto action={contact_form_action} />
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  
   <!-- TEMPORALMENTE COMENTADO - Testimonios (Ver TEMPORARY_CHANGES.md) -->
   <!-- <Testimonial class="bg-pattern-mosaico" testimonial={testimonial} /> -->
   <CallToAction call_to_action={call_to_action} />

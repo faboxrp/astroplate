@@ -14,11 +14,13 @@ const { title, intro } = Astro.props;
     <div class="row justify-center">
       <div class="lg:col-8 text-center">
         <h1 class="text-h1 font-bold text-primary dark:text-darkmode-primary leading-tight" set:html={markdownify(title)} />
-        {intro && (
-          <div class="mt-6">
-            <p class="text-xl text-primary dark:text-darkmode-light leading-relaxed" set:html={markdownify(intro)} />
-          </div>
-        )}
+        {
+          intro && (
+            <div class="mt-6">
+              <p class="text-xl text-primary dark:text-darkmode-dark leading-relaxed" set:html={markdownify(intro)} />
+            </div>
+          )
+        }
       </div>
     </div>
   </div>
