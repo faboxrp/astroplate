@@ -139,6 +139,18 @@ const homepageCollection = defineCollection({
         }),
       }),
     ),
+    // Team configuration schema
+    team: z.object({
+      doctors: z.array(
+        z.object({
+          name: z.string(),
+          id: z.string(),
+          images: z.array(z.string()),
+          main_image: z.string(),
+          active: z.boolean(),
+        }),
+      ),
+    }).optional(), // Make team optional for backwards compatibility
   }),
 });
 

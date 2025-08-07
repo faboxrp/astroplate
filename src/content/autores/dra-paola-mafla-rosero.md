@@ -1,6 +1,6 @@
 ---
 title: "Dra. Paola Mafla Rosero"
-image: "/images/team/paola-mafla.jpg" 
+image: "/images/team/paola-mafla/paola-mafla-1.jpg" 
 description: "Conozca a la Dra. Paola Mafla Rosero, especialista en Ortodoncia y Ortopedia Maxilar en OrthoPure. Experiencia, docencia y trato personalizado para su sonrisa."
 social:
   - name: instagram

@@ -4,7 +4,7 @@ subtitle: "Desde nuestro primer paciente en 2018 hasta hoy, en <strong>OrthoPure
         <strong>VERTE SONREIR CON CONFIANZA</strong>. Innovamos en técnicas de <strong>ortodoncia y ortopedia</strong>
         mientras mantenemos un trato humano — la combinación que transforma salud bucal y autoestima."
 cover: "/images/gallery/instalacion1.jpg"
-avatar: "/images/team/paola-mafla.jpg"
+avatar: "/images/team/paola-mafla/paola-mafla-1.jpg"
 stats:
   - { value: 7,   suffix: "+", label: "Años de experiencia" }
   - { value: 800, suffix: "+", label: "Sonrisas transformadas" }

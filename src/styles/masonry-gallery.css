@@ -1,147 +1,84 @@
+/* Modern responsive gallery grid - centered layout with auto-fit */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 280px);
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fit, 240px);
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+}
+
+/* Gallery item styles - optimized for square aspect ratio */
+.gallery-item {
+  position: relative;
+  width: 100%;
+}
+
+/* Hover effects are handled by React component with Tailwind classes */
+.gallery-item:hover {
+  transform: translateY(-2px);
+}
+
+/* Legacy support for masonry-gallery class name - same styles as gallery-grid */
 .masonry-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 250px);
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, 280px);
+  gap: 1.5rem;
   justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  .masonry-gallery {
+    grid-template-columns: repeat(auto-fit, 240px);
+    gap: 1.25rem;
+  }
 }
 
 @media (max-width: 768px) {
   .masonry-gallery {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
   }
 }
 
 @media (max-width: 480px) {
   .masonry-gallery {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .masonry-gallery {
+    grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
   }
 }
 
-.masonry-item {
-  position: relative; /* AÑADIDO: Para que el caption se posicione con respecto a este contenedor */
-  overflow: hidden;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-  height: 200px; /* Altura fija para todas las imágenes */
-}
-
-@media (max-width: 768px) {
-  .masonry-item {
-    height: 150px; /* Altura más pequeña en tablets */
-  }
-}
-
-@media (max-width: 480px) {
-  .masonry-item {
-    height: 200px; /* Altura adecuada para mobile */
-  }
-}
-
-.masonry-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-}
-
-.masonry-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.masonry-caption {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  width: 100%;
-  padding: 0.5rem;
-  text-align: center;
-  font-size: 0.9rem;
-  opacity: 1; /* <-- CAMBIO PRINCIPAL: de 0 a 1 */
-  /* La transición de opacidad ya no es necesaria aquí */
-}
-
-/* REGLA AÑADIDA: Para mostrar el caption al pasar el cursor */
-.masonry-item:hover .masonry-caption {
-  opacity: 1;
-}
-
-.lightbox-modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.97);
-  justify-content: center;
-  align-items: center;
-  animation: fadeIn 0.5s ease;
-}
-
-.lightbox-content {
-  position: relative;
-  max-width: 90%;
-  max-height: 80%;
-}
-
-#lightbox-image {
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 100%;
-  border-radius: 0.5rem;
-}
-
-#lightbox-caption {
-  color: #fff;
-  text-align: center;
-  margin-top: 1rem;
-  font-size: 1.1rem;
-}
-
-.close-button {
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
-  color: #fff;
-  font-size: 2.5rem;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.prev-button,
-.next-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #fff;
-  font-size: 2rem;
-  cursor: pointer;
-  padding: 1rem;
-  user-select: none;
-}
-
-.prev-button {
-  left: 1rem;
-}
-.next-button {
-  right: 1rem;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
+/* Lightbox styles are now handled by the React component using Tailwind classes */

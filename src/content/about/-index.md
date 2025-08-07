@@ -37,7 +37,7 @@ Bajo la dirección de la **Dra. Paola Mafla Rosero** –posgrado en ortodoncia y
 
 ### Un vistazo a nuestra clínica
 
-![Consultorio OrthoPure](/images/team/paola-mafla.jpg)<!-- Coloca aquí tu fotografía real -->
+![Consultorio OrthoPure](/images/team/paola-mafla/paola-mafla-1.jpg)<!-- Coloca aquí tu fotografía real -->
 
 Desde la sala de espera hasta el sillón odontológico, diseñamos cada espacio para que te sientas tranquilo y seguro.
 

@@ -1,9 +1,9 @@
 ---
 import { getEntry } from "astro:content";
-import Base from "@/layouts/Base.astro"; // Tu layout base
-import PageHeader from "@/layouts/partials/PageHeader.astro"; // Si usas un cabecero de página
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/layouts/partials/PageHeader.astro";
 import { render } from "astro:content";
-import LightboxGallery from "@/layouts/components/LightboxGallery.astro";
+import GalleryLightbox from "@/layouts/components/GalleryLightbox.tsx";
 import "@/styles/masonry-gallery.css";
 import CallToAction from "@/partials/CallToAction.astro";
 
@@ -32,13 +32,11 @@ const { title, meta_title, description, header_image, gallery_items } = galleryP
         </div>
 
         <div class="gallery">
-          {
-            Array.isArray(gallery_items) && gallery_items.length > 0 ? (
-              <LightboxGallery items={gallery_items ?? []} />
-            ) : (
-              <p>No hay imágenes en la galería actualmente.</p>
-            )
-          }
+          <GalleryLightbox 
+            client:load
+            items={gallery_items ?? []} 
+            className="gallery-grid"
+          />
         </div>
       </div>
     </section>

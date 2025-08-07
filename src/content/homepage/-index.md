@@ -40,7 +40,7 @@ features:
       link: ""
 
   - title: "Confianza y Cuidado Experto con la Dra. Paola Mafla Rosero"
-    image: "/images/team/paola-mafla.jpg" # Placeholder: Sugerencia: Foto profesional y cercana de la Dra. Paola.
+    image: "/images/team/paola-mafla/paola-mafla-1.jpg" # Placeholder: Sugerencia: Foto profesional y cercana de la Dra. Paola.
     content: "En OrthoPure, la Dra. Paola Mafla Rosero brinda un trato profesional y cercano, respaldado por su **experiencia clínica** y **docencia universitaria** de **prepgrado y postgrado** en **Odontología y Ortodoncia**, garantizando una atención informada y cuidadosa con cada paciente."
     bulletpoints:
       - "**Atención 100% Personalizada:** Cada tratamiento es único, diseñado específicamente para tus necesidades."
@@ -64,4 +64,25 @@ features:
       enable: true
       label: "Ver Galería de Casos" # Podría enlazar a una sección en "Servicios" o una página "Casos"
       link: "/galeria" # Ejemplo de enlace
+
+# Team Configuration
+team:
+  doctors:
+    - name: "Dra. Paola Mafla Rosero"
+      id: "paola-mafla"
+      images:
+        - "/images/team/paola-mafla/paola-mafla-1.jpg"
+        - "/images/team/paola-mafla/paola-mafla-2.jpg"
+        - "/images/team/paola-mafla/paola-mafla-3.jpg"
+        - "/images/team/paola-mafla/paola-mafla-4.jpg"
+        - "/images/team/paola-mafla/paola-mafla-5.jpg"
+      main_image: "/images/team/paola-mafla/paola-mafla-1.jpg"
+      active: true
+    # - name: "Dr. Juan Pérez" # Ejemplo para futuros doctores
+    #   id: "juan-perez"
+    #   images:
+    #     - "/images/team/juan-perez/juan-perez-1.jpg"
+    #     - "/images/team/juan-perez/juan-perez-2.jpg"
+    #   main_image: "/images/team/juan-perez/juan-perez-1.jpg"
+    #   active: false
 ---

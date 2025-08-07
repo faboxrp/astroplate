@@ -1,5 +1,6 @@
 ---
 import ImageMod from "@/components/ImageMod.astro";
+import TeamSlider from "@/components/TeamSlider.tsx";
 import Base from "@/layouts/Base.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import CallToAction from "@/partials/CallToAction.astro";
@@ -18,6 +19,15 @@ interface Homepage {
     button: Button;
   };
   features: Feature[];
+  team?: {
+    doctors: Array<{
+      name: string;
+      id: string;
+      images: string[];
+      main_image: string;
+      active: boolean;
+    }>;
+  };
 }
 
 const homepage = (await getEntry("homepage", "-index")) as CollectionEntry<"homepage">;
@@ -26,7 +36,10 @@ const testimonial = (await getEntry("testimonialSection", "testimonial")) as Col
 
 const call_to_action = (await getEntry("ctaSection", "call-to-action")) as CollectionEntry<"ctaSection">;
 
-const { banner, features } = homepage.data as Homepage;
+const { banner, features, team } = homepage.data as Homepage;
+
+// Get active doctor for team slider
+const activeDoctor = team?.doctors?.find(doctor => doctor.active) || team?.doctors?.[0];
 ---
 
 <Base>
@@ -194,17 +207,33 @@ const { banner, features } = homepage.data as Homepage;
 
                 {/* Image for mobile - After Title */}
                 <div class="mb-8 flex justify-center">
-                  <div class="relative overflow-hidden rounded-2xl shadow-lg group max-w-md">
-                    <ImageMod
-                      src={feature.image}
-                      height={400}
-                      width={400}
-                      alt={feature.title}
-                      format="webp"
-                      class="rounded-2xl group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div class="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent rounded-2xl" />
-                  </div>
+                  {index === 0 ? (
+                    <!-- Team Image Slider for Mobile with React + Swiper -->
+                    <div class="relative overflow-hidden rounded-2xl shadow-lg group max-w-md">
+                      <TeamSlider
+                        client:load
+                        images={activeDoctor?.images || [feature.image]}
+                        alt={activeDoctor?.name || feature.title}
+                        doctorName={activeDoctor?.name}
+                        height={400}
+                        interval={4000}
+                        className="group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                  ) : (
+                    <!-- Regular Image for other sections on Mobile -->
+                    <div class="relative overflow-hidden rounded-2xl shadow-lg group max-w-md">
+                      <ImageMod
+                        src={feature.image}
+                        height={400}
+                        width={400}
+                        alt={feature.title}
+                        format="webp"
+                        class="rounded-2xl group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div class="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent rounded-2xl" />
+                    </div>
+                  )}
                 </div>
 
                 {/* Content - After Image */}
@@ -281,17 +310,33 @@ const { banner, features } = homepage.data as Homepage;
                   </div>
 
                   <div class={`md:col-5 ${index % 2 !== 0 && "md:order-2"}`}>
-                    <div class="relative overflow-hidden rounded-2xl shadow-lg group">
-                      <ImageMod
-                        src={feature.image}
-                        height={500}
-                        width={550}
-                        alt={feature.title}
-                        format="webp"
-                        class="rounded-2xl group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div class="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent rounded-2xl" />
-                    </div>
+                    {index === 0 ? (
+                      <!-- Team Image Slider with React + Swiper -->
+                      <div class="relative overflow-hidden rounded-2xl shadow-lg group">
+                        <TeamSlider
+                          client:load
+                          images={activeDoctor?.images || [feature.image]}
+                          alt={activeDoctor?.name || feature.title}
+                          doctorName={activeDoctor?.name}
+                          height={500}
+                          interval={4000}
+                          className="group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                    ) : (
+                      <!-- Regular Image for other sections -->
+                      <div class="relative overflow-hidden rounded-2xl shadow-lg group">
+                        <ImageMod
+                          src={feature.image}
+                          height={500}
+                          width={550}
+                          alt={feature.title}
+                          format="webp"
+                          class="rounded-2xl group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent rounded-2xl" />
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
