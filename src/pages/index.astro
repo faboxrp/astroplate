@@ -281,7 +281,12 @@ const activeDoctor = team?.doctors?.find(doctor => doctor.active) || team?.docto
                 {feature.button.enable && (
                   <div class="text-center">
                     <a
-                      class="btn btn-primary btn-lg px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                      class="btn btn-primary btn-lg px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 md:hidden"
+                      href="#nosotros">
+                      {feature.button.label}
+                    </a>
+                    <a
+                      class="btn btn-primary btn-lg px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 hidden md:inline-block"
                       href={feature.button.link}>
                       {feature.button.label}
                     </a>
@@ -323,7 +328,12 @@ const activeDoctor = team?.doctors?.find(doctor => doctor.active) || team?.docto
                     {feature.button.enable && (
                       <div class="text-center md:text-left">
                         <a
-                          class="btn btn-primary btn-lg px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                          class="btn btn-primary btn-lg px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 md:hidden"
+                          href="#nosotros">
+                          {feature.button.label}
+                        </a>
+                        <a
+                          class="btn btn-primary btn-lg px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 hidden md:inline-block"
                           href={feature.button.link}>
                           {feature.button.label}
                         </a>
