@@ -102,6 +102,7 @@ const { pathname } = Astro.url;
                     "active"
                   }`}
                   data-mobile-scroll-target={menu.name.toLowerCase() === 'blog' ? 'blog' : null}
+                  {...(menu.url === '/contacto' ? { 'data-astro-reload': true } : {})}
                 >
                   {menu.name}
                 </a>
@@ -118,6 +119,7 @@ const { pathname } = Astro.url;
                     menu.name.toLowerCase() === 'servicios' ? 'servicios' :
                     menu.name.toLowerCase() === 'contacto' ? 'contacto' :
                     menu.name.toLowerCase() === 'blog' ? 'blog' : null}
+                  {...(menu.url === '/contacto' ? { 'data-astro-reload': true } : {})}
                 >
                   {menu.name}
                 </a>
