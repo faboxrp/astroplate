@@ -5,6 +5,7 @@ import PageHeader from "@/layouts/partials/PageHeader.astro"; // Si usas un cabe
 import { render } from "astro:content";
 import LightboxGallery from "@/layouts/components/LightboxGallery.astro";
 import "@/styles/masonry-gallery.css";
+import CallToAction from "@/partials/CallToAction.astro";
 
 // Obtener la entrada específica para la página de galería (asumiendo que es -index)
 // O usa getCollection si tienes múltiples archivos/entradas en la colección 'galeria'
@@ -18,16 +19,15 @@ if (!galleryPageEntry) {
 const { Content } = await render(galleryPageEntry);
 
 const { title, meta_title, description, header_image, gallery_items } = galleryPageEntry.data;
-console.log(gallery_items);
 ---
 
 <Base title={title} meta_title={meta_title} description={description} image={header_image}>
   <div class="bg-pattern-mosaico">
     <PageHeader title={title} />
 
-    <section class="section-sm">
+    <section class="section-sm text-center">
       <div class="container">
-        <div class="content mb-8 prose dark:prose-invert max-w-none">
+        <div class="content mb-4 max-w-none">
           <Content />
         </div>
 
@@ -43,4 +43,5 @@ console.log(gallery_items);
       </div>
     </section>
   </div>
+  <CallToAction call_to_action={await getEntry("ctaSection", "call-to-action")} />
 </Base>

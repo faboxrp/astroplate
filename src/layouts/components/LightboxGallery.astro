@@ -17,6 +17,7 @@ const { items } = Astro.props;
     items.map((item, index) => (
       <div class="masonry-item" data-index={index}>
         <img src={item.image_url} alt={item.alt_text} width="400" height="300" class="img-responsive" loading="lazy" />
+        {item.caption && <div class="masonry-caption">{item.caption}</div>}
       </div>
     ))
   }
