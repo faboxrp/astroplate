@@ -115,7 +115,8 @@ const activeDoctor = team?.doctors?.find(doctor => doctor.active) || team?.docto
                         class="btn btn-primary btn-lg px-10 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                         href={banner.button.link}
                         target={banner.button.link.startsWith("http") ? "_blank" : "_self"}
-                        rel="noopener">
+                        rel="noopener"
+                        {...(banner.button.link === '/contacto' ? { 'data-astro-reload': true } : {})}>
                         {banner.button.label}
                       </a>
                       <p class="text-sm text-gray-600 mt-3 font-medium">📞 Consulta gratuita • 💯 Resultados garantizados</p>
@@ -308,7 +309,7 @@ const activeDoctor = team?.doctors?.find(doctor => doctor.active) || team?.docto
                     </div>
 
                     <h2 set:html={markdownify(feature.title)} class="mb-6 text-3xl lg:text-4xl font-bold text-primary dark:text-darkmode-primary leading-tight" />
-                    <p set:html={markdownify(feature.content)} class="mb-8 text-xl text-gray-700 dark:text-gray-300 leading-relaxed font-light" />
+                    <p set:html={markdownify(feature.content)} class="mb-8 text-xl text-primary leading-relaxed font-light" />
 
                     {/* Enhanced Bullet Points */}
                     <div class="mb-8">
@@ -317,7 +318,7 @@ const activeDoctor = team?.doctors?.find(doctor => doctor.active) || team?.docto
                           <li class="relative pl-8 py-2">
                             <div class="absolute left-0 top-3 w-2 h-2 bg-primary rounded-full" />
                             <div class="bg-gradient-to-r from-primary/5 to-transparent p-4 rounded-xl border-l-2 border-primary/30">
-                              <span set:html={markdownify(bullet)} class="text-gray-700 dark:text-gray-300 font-medium" />
+                              <span set:html={markdownify(bullet)} class="dark:text-darkmode-light font-medium" />
                             </div>
                           </li>
                         ))}

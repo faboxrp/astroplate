@@ -47,7 +47,8 @@ const { call_to_action } = Astro.props;
                   <div class="text-center md:text-left">
                     <a
                       class="btn btn-primary btn-lg px-10 py-4 text-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                      href={call_to_action.data.button.link}>
+                      href={call_to_action.data.button.link}
+                      {...(call_to_action.data.button.link === '/contacto' ? { 'data-astro-reload': true } : {})}>
                       {call_to_action.data.button.label}
                     </a>
                     <p class="text-sm text-gray-600 mt-4 font-medium">📞 WhatsApp disponible • 🕐 Horarios flexibles</p>
