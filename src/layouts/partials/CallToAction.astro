@@ -45,10 +45,19 @@ const { call_to_action } = Astro.props;
 
                 {call_to_action.data.button.enable && (
                   <div class="text-center md:text-left">
+                    {/* Desktop link */}
                     <a
-                      class="btn btn-primary btn-lg px-10 py-4 text-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                      class="btn btn-primary btn-lg px-10 py-4 text-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 hidden md:inline-block"
                       href={call_to_action.data.button.link}
-                      {...(call_to_action.data.button.link === '/contacto' ? { 'data-astro-reload': true } : {})}>
+>
+                      {call_to_action.data.button.label}
+                    </a>
+                    {/* Mobile link - check if it's reservaciones */}
+                    <a
+                      class="btn btn-primary btn-lg px-10 py-4 text-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 block md:hidden"
+                      href={call_to_action.data.button.link === '/reservaciones' ? '/#reservaciones' : call_to_action.data.button.link}
+                      {...(call_to_action.data.button.link === '/reservaciones' ? { 'data-mobile-scroll-target': 'reservaciones' } : {})}
+>
                       {call_to_action.data.button.label}
                     </a>
                     <p class="text-sm text-gray-600 mt-4 font-medium">📞 WhatsApp disponible • 🕐 Horarios flexibles</p>

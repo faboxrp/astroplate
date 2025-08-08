@@ -109,14 +109,28 @@ const { pathname } = Astro.url;
               </li>
             ) : (
               <li class="nav-item">
+                {/* Desktop link - normal behavior */}
                 <a
                   href={menu.url}
-                  class={`nav-link block ${
+                  class={`nav-link hidden lg:block ${
+                    (pathname === `${menu.url}/` || pathname === menu.url) &&
+                    "active"
+                  }`}
+                  {...(menu.url === '/contacto' ? { 'data-astro-reload': true } : {})}
+                >
+                  {menu.name}
+                </a>
+                
+                {/* Mobile link - scroll to section for reservaciones, normal for others */}
+                <a
+                  href={menu.name.toLowerCase() === 'reservaciones' ? '/#reservaciones' : menu.url}
+                  class={`nav-link block lg:hidden ${
                     (pathname === `${menu.url}/` || pathname === menu.url) &&
                     "active"
                   }`}
                   data-mobile-scroll-target={menu.name.toLowerCase() === 'nosotros' ? 'nosotros' : 
                     menu.name.toLowerCase() === 'servicios' ? 'servicios' :
+                    menu.name.toLowerCase() === 'reservaciones' ? 'reservaciones' :
                     menu.name.toLowerCase() === 'contacto' ? 'contacto' :
                     menu.name.toLowerCase() === 'blog' ? 'blog' : null}
                   {...(menu.url === '/contacto' ? { 'data-astro-reload': true } : {})}

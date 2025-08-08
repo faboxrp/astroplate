@@ -8,7 +8,7 @@ banner:
   button:
     enable: true
     label: "Agenda tu Cita"
-    link: "/contacto" # Enlaza a tu página de contacto
+    link: "/reservaciones" # Enlaza a tu página de reservaciones
 
 # Features (Secciones de Características/Servicios Destacados)
 features:

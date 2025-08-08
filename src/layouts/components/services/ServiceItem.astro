@@ -55,13 +55,20 @@ const isEven = index % 2 === 0;
         </div>
 
         <div
-          class="max-w-none text-gray-700 dark:text-darkmode-light text-lg leading-relaxed [&>p]:mb-4 [&>ul]:mb-4 [&>ol]:mb-4 [&>li]:mb-2 [&>h1]:text-2xl [&>h1]:font-bold [&>h1]:mb-4 [&>h2]:text-xl [&>h2]:font-bold [&>h2]:mb-3 [&>h2]:text-primary [&>h2]:dark:text-darkmode-primary [&>h3]:text-lg [&>h3]:font-semibold [&>h3]:mb-2 [&>h3]:text-primary [&>h3]:dark:text-darkmode-primary [&>strong]:font-semibold [&>strong]:text-primary [&>strong]:dark:text-darkmode-primary [&>em]:italic [&>ul]:list-disc [&>ul]:pl-5 [&>ol]:list-decimal [&>ol]:pl-5 [&>blockquote]:border-l-4 [&>blockquote]:border-primary [&>blockquote]:pl-4 [&>blockquote]:py-2 [&>blockquote]:my-4 [&>blockquote]:bg-primary/5 [&>blockquote]:dark:bg-primary/10 [&>blockquote]:rounded-r-md [&>blockquote>ul]:mb-2 [&>blockquote>li]:mb-1 [&>blockquote>p]:mb-2">
+          class="max-w-none text-gray-700 dark:text-darkmode-light text-lg leading-relaxed [&>p]:mb-4 [&>ul]:mb-4 [&>ol]:mb-4 [&>li]:mb-2 [&>h1]:text-2xl [&>h1]:font-bold [&>h1]:mb-4 [&>h2]:text-xl [&>h2]:font-bold [&>h2]:mb-3 [&>h2]:text-primary [&>h2]:dark:text-purple-800 [&>h3]:text-lg [&>h3]:font-semibold [&>h3]:mb-2 [&>h3]:text-primary [&>h3]:dark:text-purple-800 [&>strong]:font-semibold [&>strong]:text-primary [&>strong]:dark:text-purple-800 [&>em]:italic [&>ul]:list-disc [&>ul]:pl-5 [&>ol]:list-decimal [&>ol]:pl-5 [&>blockquote]:border-l-4 [&>blockquote]:border-primary [&>blockquote]:pl-4 [&>blockquote]:py-2 [&>blockquote]:my-4 [&>blockquote]:bg-primary/5 [&>blockquote]:dark:bg-primary/10 [&>blockquote]:rounded-r-md [&>blockquote>ul]:mb-2 [&>blockquote>li]:mb-1 [&>blockquote>p]:mb-2">
           <Content />
         </div>
 
-        <a href={`/contacto?servicio=${encodeURIComponent(title)}`} class="btn btn-primary mt-6 group-hover:scale-105 transition-transform duration-300" data-astro-reload>
-          Agendar Cita
-        </a>
+        <div class="text-center">
+          {/* Desktop link */}
+          <a href={`/reservaciones?servicio=${encodeURIComponent(title)}`} class="btn btn-primary mt-6 group-hover:scale-105 transition-transform duration-300 hidden md:inline-block">
+            Agendar Cita
+          </a>
+          {/* Mobile link */}
+          <a href={`/#reservaciones?servicio=${encodeURIComponent(title)}`} class="btn btn-primary mt-6 group-hover:scale-105 transition-transform duration-300 block md:hidden" data-mobile-scroll-target="reservaciones">
+            Agendar Cita
+          </a>
+        </div>
       </div>
     </div>
   </div>

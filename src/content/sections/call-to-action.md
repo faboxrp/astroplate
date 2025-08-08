@@ -7,5 +7,5 @@ image_alt: "Dra. Paola Mafla Rosero en consulta de ortodoncia"
 button:
   enable: true
   label: "Agendar Consulta"
-  link: "/contacto" # O podría ser un enlace directo a WhatsApp si se prefiere
+  link: "/reservaciones" # O podría ser un enlace directo a WhatsApp si se prefiere
 ---

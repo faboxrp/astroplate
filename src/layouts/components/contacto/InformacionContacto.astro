@@ -28,51 +28,6 @@ const { data } = Astro.props;
 
 <section class="relative isolate overflow-hidden">
   <div class="container relative space-y-12">
-    <!-- Múltiples Ubicaciones -->
-    {
-      data.locations && data.locations.length > 0 && (
-        <div>
-          <h3 class="h4 mb-6 font-semibold text-center">Nuestras Ubicaciones</h3>
-          <div class="grid md:grid-cols-2 gap-8">
-            {data.locations.map((location, index) => (
-              <div class="bg-white dark:bg-darkmode-body p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
-                <div class="flex items-start mb-4">
-                  <Icon name="mdi:map-marker-outline" class="h-6 w-6 mr-3 mt-1 text-primary dark:text-darkmode-primary flex-shrink-0" />
-                  <div>
-                    <h4 class="font-semibold text-lg text-primary dark:text-darkmode-primary mb-2">{location.name}</h4>
-                    <div class="text-gray-700 dark:text-gray-300 whitespace-pre-line">{location.address}</div>
-                  </div>
-                </div>
-
-                {location.map_embed_code && (
-                  <div class="mt-4">
-                    <div class="aspect-w-16 aspect-h-9 map-responsive">
-                      <Fragment set:html={location.map_embed_code} />
-                    </div>
-                  </div>
-                )}
-
-                {/* Horarios específicos por ubicación */}
-                {location.opening_hours && location.opening_hours.length > 0 && (
-                  <div class="mt-4">
-                    <h5 class="font-semibold text-base text-gray-800 dark:text-gray-200 mb-2">Horario de Atención</h5>
-                    <ul class="space-y-1">
-                      {location.opening_hours.map((line) => (
-                        <li class="flex items-center text-sm">
-                          <Icon name="mdi:clock-outline" class="h-4 w-4 mr-2 text-gray-600 dark:text-gray-400" />
-                          {line}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      )
-    }
-
     <h2 class="h3 mb-6 font-semibold text-center">Información de Contacto</h2>
 
     <!-- Información de contacto general -->
@@ -129,46 +84,6 @@ const { data } = Astro.props;
       </ul>
     </div>
 
-    <!-- Compatibilidad con formato anterior (single location) -->
-    {
-      data.full_address && (!data.locations || data.locations.length === 0) && (
-        <div class="mt-8">
-          <h3 class="h4 mb-4 font-semibold">Nuestra Ubicación</h3>
-          <div class="flex items-start">
-            <Icon name="mdi:map-marker-outline" class="h-6 w-6 mr-3 mt-1 text-primary dark:text-darkmode-primary" />
-            <div class="whitespace-pre-line prose dark:prose-invert max-w-none" set:html={data.full_address} />
-          </div>
-        </div>
-      )
-    }
-
-    <!-- Mapa para ubicación única (compatibilidad) -->
-    {
-      data.map_embed_code && (!data.locations || data.locations.length === 0) && (
-        <div class="mt-8">
-          <div class="aspect-w-16 aspect-h-9 map-responsive">
-            <Fragment set:html={data.map_embed_code} />
-          </div>
-        </div>
-      )
-    }
-
-    <!-- Horarios de Atención Globales (solo si no hay ubicaciones específicas) -->
-    {
-      data.opening_hours && data.opening_hours.length > 0 && (!data.locations || data.locations.length === 0) && (
-        <div class="mt-8">
-          <h3 class="h4 mb-4 font-semibold">Horario de Atención</h3>
-          <ul class="space-y-2">
-            {data.opening_hours.map((line) => (
-              <li class="flex items-center">
-                <Icon name="mdi:clock-outline" class="h-5 w-5 mr-2 text-gray-600 dark:text-gray-400" />
-                {line}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )
-    }
   </div>
 </section>
 

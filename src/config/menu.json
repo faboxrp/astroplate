@@ -42,11 +42,19 @@
       "_disabled": true
     },
     {
+      "name": "Reservaciones",
+      "url": "/reservaciones"
+    },
+    {
       "name": "Contacto",
       "url": "/contacto"
     }
   ],
   "footer": [
+    {
+      "name": "Reservaciones",
+      "url": "/reservaciones"
+    },
     {
       "name": "Contacto",
       "url": "/contacto"

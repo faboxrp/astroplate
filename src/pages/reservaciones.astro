@@ -4,21 +4,22 @@ import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
 import PageHeader from "@/partials/PageHeader.astro";
 import { getEntry } from "astro:content";
-import { markdownify } from "@/lib/utils/textConverter";
-import InformacionContacto from "@/layouts/components/contacto/InformacionContacto.astro";
-import FormularioContacto from "@/layouts/components/contacto/FormularioContacto.astro";
+import UbicacionesReservaciones from "@/layouts/components/reservaciones/UbicacionesReservaciones.astro";
 import CallToAction from "@/partials/CallToAction.astro";
 
 // Lógica para obtener datos
 const contactPageData = await getEntry("contact", "-index");
 
 if (!contactPageData) {
-  return Astro.redirect('/404');
+  return Astro.redirect("/404");
 }
 
 const call_to_action = await getEntry("ctaSection", "call-to-action");
-const { title, meta_title, description, image, intro_text } = contactPageData.data;
-const { contact_form_action } = config.params;
+const { meta_title, description, image } = contactPageData.data;
+
+// Datos específicos para reservaciones
+const title = "Reservaciones";
+const intro_text = "Agenda tu cita en cualquiera de nuestras ubicaciones, Ibarra y Tulcán.";
 ---
 
 <Base title={title} meta_title={meta_title} description={description} image={image}>
@@ -26,17 +27,7 @@ const { contact_form_action } = config.params;
     <PageHeader title={title} intro={intro_text} />
     <section class="pb-14">
       <div class="container">
-        <div class="space-y-12">
-          {/* Información de contacto */}
-          <div>
-            <InformacionContacto data={contactPageData.data} />
-          </div>
-
-          {/* Formulario de contacto */}
-          <div class="flex justify-center">
-            <FormularioContacto action={contact_form_action} />
-          </div>
-        </div>
+        <UbicacionesReservaciones data={contactPageData.data} />
       </div>
     </section>
     <CallToAction call_to_action={call_to_action} />

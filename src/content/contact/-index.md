@@ -6,7 +6,7 @@ draft: false
 image: "/images/contact-banner.jpg"
 
 # Información general de contacto
-intro_text: "No dudes en comunicarte con nosotros para agendar tu cita o resolver cualquier inquietud."
+intro_text: "¡Estamos aquí para ayudarte! Contáctanos y descubre cómo podemos transformar tu sonrisa."
 phone_number: "+59321234567" 
 phone_number_display: "096-213-3956" 
 whatsapp_number: "593962133956" 
