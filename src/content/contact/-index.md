@@ -18,6 +18,7 @@ locations:
   - name: "Ibarra"
     address: |
       Av. Ricardo Sánchez y Bartolomé García
+
       Ibarra, Ecuador
     opening_hours:
       - "Lunes a Viernes: 8:00 AM - 7:00 PM"
